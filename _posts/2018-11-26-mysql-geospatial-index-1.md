@@ -21,6 +21,7 @@ create table place (
 )
 ```
 
+<br>
 간단한 python script 로 mysql script 파일을 생성합니다. 양재역과 청담역을 대각선 꼭지점으로 하는 직사각형 내부의 위도/경도를 랜덤하게 50000개 생성하고, 테이블에 insert 하는 sql 파일을 만드는 python script 입니다.
 
 ```python
@@ -48,6 +49,7 @@ with open("place.sql", "w") as file:
 # (9999, point(127.03440857599458, 37.512764805693074));
 ```
 
+<br>
 mysql shell 로 sql 을 실행해서 데이터를 insert 합니다.
 
 ```
@@ -74,13 +76,12 @@ mysql> select count(ST_Distance_Sphere(location, point(127.048995, 37.504506)) <
 1 row in set (0.06 sec)
 ```
 
+<br>
 다음으로 spatial index 를 사용하기 위해 where 절에 [Within](https://dev.mysql.com/doc/refman/5.7/en/spatial-relation-functions-mbr.html#function_within) 를 사용해서 적당한 boundary 를 잡아줍니다. MySQL 5.7 버전의 `point` 타입은 2차원 직교 좌표평면 위의 점이라는 사실을 상기합니다. 따라서 기준점으로 부터 동서남북 사방으로 200m 떨어진 위도/경도 점을 계산한 다음에 이를 아우르는 직사각형을 boundary 로 잡으면 됩니다. python 의 `geopy` 패키지의 도움을 받아 기준점으로부터 특정 방향으로 특정 거리만큼 떨어진 위도/경도 점을 계산합니다.
 
-```bash
-pip install geopy
-```
-
 ```python
+# pip install geopy
+
 import geopy
 from geopy.distance import VincentyDistance
 
@@ -92,6 +93,7 @@ VincentyDistance(kilometers=0.2).destination(origin, 180.0). # 남쪽 Point(37.5
 VincentyDistance(kilometers=0.2).destination(origin, 270.0). # 서쪽 Point(37.50450597834414, 127.04673307164359, 0.0)
 ```
 
+<br>
 왼쪽 아래 point 와 오른쪽 위 point 로 **LINESTRING** 을 만들고, [Envelope](https://dev.mysql.com/doc/refman/5.7/en/gis-general-property-functions.html#function_envelope) 함수를 써서 **POLYGON** 으로 만들어 where 절에 사용합니다.
 
 * 왼쪽 아래 point = (최소 X, 최소 Y) = (서쪽 경도, 남쪽 위도) = (127.04673307164359, 37.502703988850925)
@@ -107,6 +109,7 @@ mysql> select count(ST_Distance_Sphere(location, point(127.048995, 37.504506)) <
 1 row in set, 3 warnings (0.01 sec)
 ```
 
+<br>
 spatial index 를 사용한 경우 소요시간이 약 **10ms** 로, 사용하지 않은 경우의 **60ms** 보다 짧아지는 것을 확인할 수 있습니다. **explain** 로 확인해보니, 전체 테이블을 처리하는 대신 spatial index 의 도움을 받아 약 251개의 일부 레코드만 처리하는 것을 알 수 있습니다.
 
 ```
