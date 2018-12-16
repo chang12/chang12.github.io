@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+VCNC 에서 데이터 엔지니어로 일하고 있습니다.
 
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[fakenerd92@gmail.com](mailto:fakenerd92@gmail.com)
