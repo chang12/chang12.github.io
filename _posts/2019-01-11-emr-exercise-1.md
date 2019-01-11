@@ -14,7 +14,7 @@ Ad-hoc 분석과 배치 작업에 Apache Spark 를 쓰고 있습니다. 현재 �
 
 EMR 콘솔에서 클러스터를 만들 때 Quick Options 과 Advanced Options 2가지 방식을 제공합니다. Quick Options 에는 함께 자주 사용되는 Hadoop 생태계의 프레임워크들 묶음이 있어서 선택할 수 있어 편리합니다. Spark + Zeppelin 묶음도 준비되어 있으므로, 간단히 몇가지만 설정해주면 몇 분만에 클러스터를 생성할 수 있습니다.
 
-![EMR Quick Options](https://www.dropbox.com/s/n1ksp4wgwi4rsfb/2019-01-11-EMR-Quick-Options.png)
+![EMR Quick Options](https://drive.google.com/uc?export=view&id=1KKc8Bn-lZoyznVV935E6ge2zJHeTQ8G1)
 
 클러스터가 정상적으로 만들어지고 **Waiting** (spark 어플리케이션이 제출되길 기다리는 상태) 상태에 이를때 까지 3가지 관찰이 있었습니다.
 
@@ -22,7 +22,7 @@ EMR 콘솔에서 클러스터를 만들 때 Quick Options 과 Advanced Options 2
 * **EMR role**, **EC2 instance profile** 라는 이름의 IAM role 을 생성합니다. 전자는 EMR 이 자체적으로 사용하는 것 같고 (e.g terminate nodes), 후자는 spark master / worker EC2 에 사용합니다.
 * 클러스터 상세 화면에서, 해당 클러스터와 동일한 클러스터를 띄울 수 있는 AWS CLI 명령어를 얻을 수 있습니다.
 
-![EMR AWS CLI export](https://www.dropbox.com/s/cnr5hmaqpfllzd7/2019-01-11-EMR-AWS-CLI-export.png?dl=0)
+![EMR AWS CLI export](https://drive.google.com/uc?export=view&id=1uLx6VofM3SxukhdRk3L7T7rs4q9fF9hr)
 
 이후 브라우저로 Zeppelin 에 접속하기 위해서 몇 가지 수정이 필요했습니다.
 
