@@ -1,11 +1,11 @@
 ---
 layout: post
-title: EMR 연습 (1): 콘솔에서 Zeppelin, Spark 클러스터 생성
+title: EMR 연습 (1) 콘솔에서 Zeppelin, Spark 클러스터 생성
 tags:
   - aws
   - emr
   - spark
-  - terraform
+  - zeppelin
 ---
 
 Ad-hoc 분석과 배치 작업에 Apache Spark 를 쓰고 있습니다. 현재 실무에서는 AWS 인프라 위에 직접 Spark 클러스터와 Zeppelin 을 구성해서 사용하고 있습니다. 기존 클러스터 구성이 만족스럽기에 EMR 로 마이그레이션 하진 않겠지만, 언젠가 별도의 인프라를 새롭게 구성해야 한다면 EMR 을 써보고 싶은 마음입니다. 그래서 EMR 에 대해 공부하기 시작했습니다.
