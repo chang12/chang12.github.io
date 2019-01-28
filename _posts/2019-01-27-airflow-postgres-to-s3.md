@@ -76,16 +76,13 @@ t1 = PostgresToS3Operator(task_id='postgres_to_s3', dag=dag, sql=sql, bucket=buc
 
 ### PostgreSQL connection 설정
 
-[Managing Connections](https://airflow.readthedocs.io/en/stable/howto/manage-connections.html) 문서에서 환경변수로 connection 을 설정하는 방법을 소개합니다. Operator / Hook 코드에서 `xxx_conn_id` 형태의 parameter 이름이 종종 등장하는데, argument 로 받은 connection id 문자열에 `AIRFLOW_CONN_` suffix 를 붙인 이름의 환경변수 값을 참조하는 방식입니다. PostgreSQL DBMS 에 접속할 때도 이 connection id 가 쓰이고, PostgresToGoogleCloudStorageOperator 에서 `postgres_conn_id` parameter 의 기본값으로 **'postgres_default'** 을 사용하므로 그에 맞춰 `~/.bashrc` 에서 `AIRFLOW_CONN_POSTGRES_DEFAULT` 변수를 선언합니다.
+[Managing Connections](https://airflow.readthedocs.io/en/stable/howto/manage-connections.html) 문서에서 환경변수로 connection 을 설정하는 방법을 소개합니다. Operator, Hook 코드에서 `_conn_id` suffix 가 붙은 이름의 파라미터에 argument 로 `abc_def` 를 넘기면 `AIRFLOW_CONN_` postfix 를 붙인 `AIRFLOW_CONN_XYZ_DEF` 이름의 환경변수 값을 참조하는 방식입니다. PostgreSQL DBMS 에 접속할 때도 마찬가지 방식을 사용하고, PostgresToGoogleCloudStorageOperator 에서 `postgres_conn_id` 파라미터의 기본값으로 **'postgres_default'** 을 사용하므로 이에 맞춰 ~/.bashrc` 에 환경변수를 선언합니다.
 
 ```bash
-# ~/.bashrc
-
-# ...
 export AIRFLOW_CONN_POSTGRES_DEFAULT='postgresql://<user>:<password>@<rds_endpoint>:<port>/<database>'
 ```
 
-또한 python 코드로 PostgreSQL 에 쿼리를 날리기 위해 필요한 DB API 2.0 구현체인 **psycopg2** 패키지를 설치합니다.
+또한 PostgreSQL 에 대한 DB API 2.0 구현체인 **psycopg2** 패키지를 설치합니다.
 
 ```
 pip install psycopg2
