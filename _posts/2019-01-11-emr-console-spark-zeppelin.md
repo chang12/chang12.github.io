@@ -1,6 +1,6 @@
 ---
 layout: post
-title: EMR 연습 (1) 콘솔에서 Zeppelin, Spark 클러스터 생성
+title: EMR 콘솔에서 Spark, Zeppelin 클러스터 생성
 tags:
   - aws
   - emr
