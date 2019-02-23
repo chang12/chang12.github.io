@@ -32,7 +32,7 @@ DLL, gcc, .so 등의 키워드들을 보고나니 정신이 아득해집니다. 
 * Python 3.6.3
 * lightgbm==2.0.11 (다른 패키지에서 `lightgbm<2.1,>=2.0.11` 를 요구)
 
-## Library not loaded: /usr/local/opt/gcc/lib/gcc/7/libgomp.1.dylib
+## OSError, dlopen, Library not loaded
 
 해당 경로를 찾아보니 `/usr/local/opt` 디렉토리 아래 `gcc` 디렉토리가 존재하지 않습니다. 의아해지면서, `OSError` 를 발생시킨 `dlopen` 함수에 대해 궁금해집니다. [Python GitHub](https://github.com/python/cpython/blob/v3.6.3/Lib/ctypes/__init__.py#L133) 의 코드를 보니 `_ctypes` 모듈의 `dlopen` 함수입니다. python shell 을 실행해서 `_ctypes` 모듈의 파일 경로를 찾아봅니다.
 
@@ -111,4 +111,4 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## 레퍼런스
 
-* [LightGBM and gcc 8 in MacOS: Library not loaded: /usr/local/opt/gcc/lib/gcc/7/libgomp.1.dylib #1369](https://github.com/Microsoft/LightGBM/issues/1369)
+* [Microsoft/LightGBM/issues/1369](https://github.com/Microsoft/LightGBM/issues/1369)
