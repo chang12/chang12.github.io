@@ -51,7 +51,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Microsoft/LightGBM #1369
 
-다행히 동료분이 이미 맞닿뜨렸던 에러였고, [해결 방법이 적힌 GitHub issue](https://github.com/Microsoft/LightGBM/issues/1369) 를 공유해주셨습니다. 읽어보니 PyPi 에 업로드 된 binary 를 빌드하는 환경과, OSX 개발 환경에서 문제에 맞닿뜨린 개발자들의 환경에 차이로 인한 문제였습니다. 자세히는 gcc 버전의 차이라고 합니다. issue 리포팅한 개발자는 lightgbm 소스 코드로 직접 빌드해서 해결했다고 합니다. 고민이 됩니다.
+다행히 동료분이 이미 맞닿뜨렸던 에러였고, [해결 방법이 적힌 GitHub issue](https://github.com/Microsoft/LightGBM/issues/1369) 를 공유해주셨습니다. PyPi 에 업로드 된 binary 를 빌드하는 환경과, OSX 에서 이를 사용하려는 개발자들의 환경 차이로 인한 문제였습니다. 자세히는 gcc 버전의 차이라고 합니다. issue 리포팅한 개발자는 lightgbm 소스 코드로 직접 빌드해서 해결했다고 합니다. 고민이 됩니다.
 
 * `/usr/local/opt/gcc/lib/gcc/7/libgomp.1.dylib` 이 없는게 문제니까 넣어줘서 배포판의 환경을 맞춰준다.
 * issue 에 적힌대로 소스 코드로 직접 빌드한다.
