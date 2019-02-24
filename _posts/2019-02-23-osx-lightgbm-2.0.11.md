@@ -105,9 +105,38 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
+## Docker
+
+이러한 고충을 지인에게 털어놓으니 `애초에 OSX 에서 시도하지 말고, Docker 로 Linux 환경에서 실행했으면 문제 없었을 걸?` 이라는 조언을 들었습니다. 일견 분했지만 합당한 조언이었다고 생각합니다. 겸사겸사 Docker 공부의 첫 삽을 떠봤습니다. [What is Docker and How to Use it With Python (Tutorial)](https://djangostars.com/blog/what-is-docker-and-how-to-use-it-with-python/) 글을 맨 처음으로 봤는데 유익했습니다. 구글링 해가면서 Dockerfile 을 작성했습니다.
+
+```Dockerfile
+FROM python:3.7.2
+
+# docker build 때는 requirements.txt 파일만 복사해서 패키지들 설치한 뒤 다시 requirements.txt 파일은 제거합니다.
+# 이후 container 띄울 때 -v 옵션으로 프로젝트 경로를 마운트 합니다.
+WORKDIR /foo/bar
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+RUN rm requirements.txt
+```
+
+Dockerfile 을 가지고 image 를 생성합니다.
+
+```
+docker build --tag your-tag-name .
+```
+
+Dockerfile 의 주석에 적었던 것 처럼, container 를 띄울 때는 프로젝트 경로를 마운트 합니다.
+
+```
+docker run -i -t --rm -v /path-to-foo-bar:/foo/bar your-tag-name /bin/bash
+```
+
+원하는 python 스크립트를 실행해서 lightgbm 이 무리없이 설치되어 사용되었음을 확인할 수 있었습니다.
+
 ## 마치며
 
-고통스러웠지만, 다행히 OSX 에서 `lightgbm` 패키지를 사용할 수 있게 되었습니다. `애초에 OSX 에서 시도하지 말고, Docker 로 Ubuntu 에서 실행했으면 문제 없었을 걸?` 이라는 조언을 들었는데 합당하다고 생각합니다. 다음번에는 이에 대해 알아보겠습니다.
+고통스러웠지만, 다행히 OSX 에서 `lightgbm` 패키지를 사용할 수 있게 되었습니다. 겸사겸사 Docker 공부의 첫 삽을 뜨게 되어 유익했습니다.
 
 ## 레퍼런스
 
