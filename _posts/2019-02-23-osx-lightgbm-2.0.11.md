@@ -109,7 +109,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 이러한 고충을 지인에게 털어놓으니 `애초에 OSX 에서 시도하지 말고, Docker 로 Linux 환경에서 실행했으면 문제 없었을 걸?` 이라는 조언을 들었습니다. 일견 분했지만 합당한 조언이었다고 생각합니다. 겸사겸사 Docker 공부의 첫 삽을 떠봤습니다. [What is Docker and How to Use it With Python (Tutorial)](https://djangostars.com/blog/what-is-docker-and-how-to-use-it-with-python/) 글을 맨 처음으로 봤는데 유익했습니다. 구글링 해가면서 Dockerfile 을 작성했습니다.
 
-```Dockerfile
+```
 FROM python:3.7.2
 
 # docker build 때는 requirements.txt 파일만 복사해서 패키지들 설치한 뒤 다시 requirements.txt 파일은 제거합니다.
