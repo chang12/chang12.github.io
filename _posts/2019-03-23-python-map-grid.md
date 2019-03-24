@@ -17,7 +17,7 @@ Python 으로 지도 위에 정사각 격자를 그리려고 합니다. 정확�
 
 "folium rectangle grid" 정도의 키워드로 구글링을 해서 가장 위에 뜬 [Analysing Geographic Data with Folium](https://www.jpytr.com/post/analysinggeographicdatawithfolium/) 글에서 지도 위에 격자를 그렸습니다. jupyter notebook 으로 코드를 그대로 옮기고 좌표만 바꿔보니 잘 그려집니다.
 
-![https://github.com/chang12/chang12.github.io/blob/master/images/2019-03-23-pic1-copy-and-paste-to-seoul-grid.png?raw=true](pic1-copy-and-paste-to-seoul-grid.png)
+![https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-03-23-pic1-copy-and-paste-to-seoul-grid.jpg](pic1-copy-and-paste-to-seoul-grid.jpg)
 
 위의 글에서는 좌하단/우상단 (위도, 경도) 를 받아서 각도를 등간격으로 나눠 격자를 그렸습니다. 이를 직교 좌표계에서 원하는 미터 간격으로 그리도록 수정하고 싶었습니다.
 
@@ -127,7 +127,7 @@ for i, geo_json in enumerate(geo_jsons):
 m.save('index.html')
 ```
 
-![https://raw.githubusercontent.com/chang12/chang12.github.io/ea7d5073e8b8b4626916d0fd1c33e2a4fa8fe263/images/2019-03-25-pic2-seoul-1km-50x50-grid.png](pic2-seoul-1km-50x50-grid.png)
+![https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-03-25-pic2-seoul-1km-50x50-grid.jpg](pic2-seoul-1km-50x50-grid.jpg)
 
 ## 레퍼런스
 
