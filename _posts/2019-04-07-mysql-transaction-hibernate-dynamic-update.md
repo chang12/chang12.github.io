@@ -36,7 +36,7 @@ docker run -p {port_you_want}:3306 --name {name_you_want} -e MYSQL_ROOT_PASSWORD
 
 ### Gradle 프로젝트
 
-문제의 상황을 별도의 Gradle 프로젝트로 간단히 재현합니다. Kotlin + Spring Boot + Hibernate 구성입니다. [Spring Initializr 페이지](https://start.spring.io/) 에서 Gradle Project + Kotlin + Spring Boot 2.1.4 를 선택하고 Dependencies 에서 JPA 를 추가했습니다. MySQL JDBC Driver 를 위해 `'mysql:mysql-connector-java:8.0.15'` dependency 를 추가하고, `application.properties` 에 DB 접속을 위한 설정값을 명시하고, 테스트 코드를 작성합니다. 위에 시간순으로 정리한 상황을 재현하기 위해 `CountDownLatch` 로 Thread 의 코드 실행 순서를 제어했습니다.
+문제의 상황을 별도의 Gradle 프로젝트로 간단히 재현합니다. Kotlin + Spring Boot + Hibernate 구성입니다. [Spring Initializr 페이지](https://start.spring.io/) 에서 Gradle Project + Kotlin + Spring Boot 2.1.4 를 선택하고 Dependencies 에서 JPA 를 추가했습니다. MySQL JDBC Driver 를 위해 `'mysql:mysql-connector-java:8.0.15'` dependency 를 추가하고, `application.properties` 에 DB 접속을 위한 설정값을 명시하고, 테스트 코드를 작성합니다. 위에 시간순으로 정리한 상황을 재현하기 위해 `CountDownLatch` 로 Thread 의 코드 실행 순서를 제어했습니다. 전체 코드는 [GitHub](https://github.com/chang12/mysql-transaction-example/tree/fe263ea82d7294970ec20db7f0486c7842f2f6ad) 에서 확인할 수 있습니다.
 
 ```kotlin
 @Autowired
