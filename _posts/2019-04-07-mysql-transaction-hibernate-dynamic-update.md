@@ -21,7 +21,7 @@ API 서버에서 남긴 로그와, DB 상태가 일치하지 않는 경우를 �
 * 트랜잭션 T2 에서 `i1.b = 200` 로 assign 후 update (`a = null, b = 200`).
 * `i1` 은 `id = 1, a = null, b = 200` 으로 update 됨. 따라서 로그 (`a = 100`) 와 DB (`a = null`) 가 불일치.
 
-코드에서 트랜잭션의 isolation level 을 신경쓰지 않았으므로 default 값이 쓰였을 것이고, MySQL 5.7 DBMS 의 default isolation level 은 `REPEATABLE READ` 입니다. [MySQL 5.7 DBMS 의 `REPEATABLE READ` isolation level 은 일반 select 문을 사용할 경우 lock 을 걸지 않으므로](https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html), 트랜잭션 T1 가 `i1` 을 select 한 뒤에 트랜잭션 T2 도 `i1` 을 select 할 수 있었습니다.
+코드에서 트랜잭션의 isolation level 을 신경쓰지 않았으므로 default 값이 쓰였고, MySQL 5.7 DBMS 의 default isolation level 은 `REPEATABLE READ` 입니다. [MySQL 5.7 DBMS 의 `REPEATABLE READ` isolation level 은 일반 select 문을 사용할 경우 lock 을 걸지 않으므로](https://dev.mysql.com/doc/refman/5.7/en/innodb-transaction-isolation-levels.html), 트랜잭션 T1 가 `i1` 을 select 한 뒤에 트랜잭션 T2 도 `i1` 을 select 할 수 있었습니다.
 
 ## 상황을 재현해보려면?
 
@@ -36,7 +36,7 @@ docker run -p {port_you_want}:3306 --name {name_you_want} -e MYSQL_ROOT_PASSWORD
 
 ### Gradle 프로젝트
 
-문제의 상황을 별도의 Gradle 프로젝트로 간단히 재현합니다. Kotlin + Spring Boot + Hibernate 구성입니다. [Spring Initializr 페이지](https://start.spring.io/) 에서 Gradle Project + Kotlin + Spring Boot 2.1.4 를 선택하고 Dependencies 에서 JPA 를 추가했습니다. MySQL JDBC Driver 를 위해 `'mysql:mysql-connector-java:8.0.15'` dependency 를 추가하고, `application.properties` 에 DB 접속을 위한 설정값을 명시하고, 테스트 코드를 작성합니다. 위에 시간순으로 정리한 상황을 재현하기 위해 `java.util.concurrent.CountDownLatch` 로 Thread 의 코드 실행 순서를 제어했습니다.
+문제의 상황을 별도의 Gradle 프로젝트로 간단히 재현합니다. Kotlin + Spring Boot + Hibernate 구성입니다. [Spring Initializr 페이지](https://start.spring.io/) 에서 Gradle Project + Kotlin + Spring Boot 2.1.4 를 선택하고 Dependencies 에서 JPA 를 추가했습니다. MySQL JDBC Driver 를 위해 `'mysql:mysql-connector-java:8.0.15'` dependency 를 추가하고, `application.properties` 에 DB 접속을 위한 설정값을 명시하고, 테스트 코드를 작성합니다. 위에 시간순으로 정리한 상황을 재현하기 위해 `CountDownLatch` 로 Thread 의 코드 실행 순서를 제어했습니다.
 
 ```kotlin
 @Autowired
@@ -95,7 +95,7 @@ mysql> select * from item where id = 1;
 
 근본적인 해결책은 [Ditto Kim 님의 블로그 글](https://blog.sapzil.org/2017/04/01/do-not-trust-sql-transaction/) 에 잘 정리되어 있습니다. 트랜잭션의 isolation level 을 높이거나, 일반 select 이 아닌 `select for update` 구문을 활용해서 트랜잭션 T1 의 select 때 해당 레코드에 lock 을 걸게 만들거나 혹은 테이블에 version 컬럼이나 timestamp 컬럼을 추가한 뒤 optimistic locking 을 써서 트랜잭션 T2 가 실패해서 rollback 된 뒤 적절히 retry 되도록 유도하는 것입니다.
 
-그러나 이번 경우에만 한정지어 생각해보면, 트랜잭션 T2 의 의도는 `i1.b = 200` 로 업데이트 하는 것인데 반해, update 쿼리에는 자신이 읽어들인 `i1.a = null` 까지 `set` 절에 포함시켜 버린 게 아쉽습니다. 이는 hibernate 의 `EntityManager#persist` 의 default 동작인데, `Entity` 클래스에 `@org.hibernate.annotations.DynamicUpdate` annotation 을 달아서 값이 바뀐 컬럼만 `set` 절에 포함시키도록 동작을 변경할 수 있습니다.
+그러나 이번 경우에만 한정지어 생각해보면, 트랜잭션 T2 의 의도는 `i1.b = 200` 로 업데이트 하는 것인데 반해, update 쿼리에는 자신이 읽어들인 `i1.a = null` 까지 `set` 절에 포함시켜 버린 게 아쉽습니다. 이는 hibernate 의 `EntityManager#persist` 의 default 동작인데, `Entity` 클래스에 `@DynamicUpdate` annotation 을 달아서 값이 바뀐 컬럼만 `set` 절에 포함시키도록 동작을 변경할 수 있습니다.
 
 ```kotlin
 @Entity
