@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 나중 트랜잭션이 이전 트랜잭션의 결과를 덮어씌우는 문제를 해결하려면?
+title: 이전 트랜잭션의 결과를 덮어씌우는 문제를 해결하려면?
 tags:
   - transaction
   - mysql
