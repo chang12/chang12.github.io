@@ -1,3 +1,10 @@
+---
+layout: post
+title: Docker Compose 는 뭘까?
+tags:
+  - docker
+---
+
 Docker 를 활용해서 개발 머신의 환경에 관계 없이 실행 환경을 선택할 수 있었고 ([OSX 에서 Python LightGBM 패키지 설치때 고생한 경험](https://chang12.github.io/osx-lightgbm-2.0.11/)), 비개발자 팀원이 개발 환경을 구성하지 않고도 프로그램을 실행할 수 있게 (`docker load` -> `docker run`) 도울 수 있었습니다. Docker Compose 라는 것도 있다는데 뭔지 궁금해집니다.
 
 ## Docker Compose?
