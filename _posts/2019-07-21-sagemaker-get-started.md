@@ -52,13 +52,14 @@ from chalice import Chalice
 from requests_toolbelt import MultipartDecoder
 
 app = Chalice(app_name='your-app-name')
+# 'multipart/form-data' 가 꼭 포함되야 합니다. 안 그러면 API Gateway 가 byte 를 manipulate 해서 Pillow 로 처리할 때 에러가 발생합니다.
 app.api.binary_types = [
     'application/octet-stream', 'application/x-tar', 'application/zip',
     'audio/basic', 'audio/ogg', 'audio/mp4', 'audio/mpeg', 'audio/wav',
     'audio/webm', 'image/png', 'image/jpg', 'image/jpeg', 'image/gif',
     'video/ogg', 'video/mpeg', 'video/webm',
     'multipart/form-data'
-]. # 'multipart/form-data' 가 꼭 포함되야 합니다. 
+].
 sagemaker = boto3.client('sagemaker-runtime')
 
 
@@ -103,11 +104,13 @@ Resources deployed:
   - Rest API URL: https://yyy.execute-api.ap-northeast-2.amazonaws.com/api/
 ```
 
-[Postman](https://www.getpostman.com/) 로 테스트 해봅니다. [MNIST as .jpg](https://www.kaggle.com/scolianni/mnistasjpg) 에서 다운로드 받은 jpg 이미지 중 하나를 골라서 multipart/form-data 에 `img` 를 key 로 지정하고, 이전 단계에서 확인한 Rest API URL 에 때려봅니다. 
+[Postman](https://www.getpostman.com/) 으로 테스트 해봅니다. [MNIST as .jpg](https://www.kaggle.com/scolianni/mnistasjpg) 에서 다운로드 받은 jpg 이미지 중 하나를 골라봅시다. multipart/form-data 에 `img` 를 key 로 지정하고, 이전 단계에서 확인한 Rest API URL 에 때려봅니다.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-07-21-pic3-result.png" alt="2019-07-21-pic3-result.png"/>
 </p>
+
+추론된 label 값이 올바른 것을 확인할 수 있습니다.
 
 ## 레퍼런스
 
