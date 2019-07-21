@@ -1,6 +1,6 @@
 ---
 layout: post
-title: SageMaker Get Started 에 더하여 \: API Gateway + Lambda 로 배포
+title: SageMaker Get Started 에 더하여 - API Gateway, Lambda 로 배포
 tags:
   - SageMaker
   - API Gateway
