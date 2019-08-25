@@ -1,6 +1,6 @@
 ---
 layout: post
-title: RDBMS to OLAP 에 대한 생각 : created_at, updated_at 컬럼
+title: RDBMS to OLAP 에 대한 생각 - created_at, updated_at 컬럼
 tags:
   - Data Engineering Best Practices
 ---
