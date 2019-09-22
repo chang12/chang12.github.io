@@ -80,7 +80,7 @@ Task 는 실패했고, Log 를 확인해보니,
 
 상대 경로로 파일을 읽으려고 시도하면, current working directory 가 기준 경로가 되고, 그 값은 DAG 스크립트의 위치와 다르기 때문에, 실제 SQL 파일의 경로가 아닌 잘못된 경로를 읽으려고 해서 실패하게 됩니다.
 
-이 경우 Airflow 에서 기본 설정으로 제공해주는 `DAGS_FOLDER` 환경 변수를 사용하면 편리합니다. 앞서 소개한 디렉토리 구조로 DAG 스크립트를 넣었을 때, 파일 경로는 위에 적은 것 처럼 `/home/airflow/gcs/dags/dag_1.py` 가 되고, 이때 `DAGS_FOLDER` 값은 `/home/airflow/gcs/dags` 가 됩니다. 따라서 그 경로를 기준으로 사용하면, 올바른 SQL 파일 경로를 얻을 수 있습니다.
+이 경우 Airflow 에서 기본 설정으로 제공해주는 `DAGS_FOLDER` 환경 변수를 사용하면 편리합니다. 앞서 소개한 디렉토리 구조로 DAG 스크립트를 넣었을 때, `DAGS_FOLDER` 값은 `/home/airflow/gcs/dags` 가 됩니다. 따라서 그 경로를 기준으로 사용하면, 올바른 SQL 파일 경로를 얻을 수 있습니다.
 
 ```python
 task_a = BigQueryOperator(
