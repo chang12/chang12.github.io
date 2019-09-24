@@ -1,8 +1,7 @@
 ---
 layout: post
-title: Cloud Composer 를 업무에 처음 도입하며 정리한 몇가지 생각들
-tags:
-  - Cloud Composer
+title: "Cloud Composer 를 업무에 처음 도입하며 정리한 몇가지 생각들"
+tags: [Cloud Composer]
 ---
 
 Cloud Composer 를 업무에 적용해보기 위해 처음 학습한 내용을 [Cloud Composer 시작하기](https://chang12.github.io/cloud-composer-start/) 글에서 정리했었습니다. 학습한 내용들을 가지고 이후 실제로 업무에 (= 데이터 파이프라인 개발) 적용했고, 그 과정중에 몇가지 고민하고 정리한 내용들이 있었습니다.
