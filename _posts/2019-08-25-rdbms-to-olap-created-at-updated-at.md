@@ -1,8 +1,7 @@
 ---
 layout: post
-title: RDBMS to OLAP - created_at 과 updated_at
-tags:
-  - Data Engineering Best Practices
+title: "RDBMS to OLAP : created_at 과 updated_at"
+tags: [Data Engineering Best Practices]
 ---
 
 데이터 엔지니어의 중요한 업무 중 하나는 각종 소스의 데이터를 적절한 [OLAP 데이터베이스로](https://en.wikipedia.org/wiki/Online_analytical_processing) 로 옮기는 것입니다. 이때 비중이 큰 소스 중 하나가 백엔드 시스템이 사용하는 RDBMS 입니다. 실제로, AWS Aurora MySQL 의 데이터를 Google Cloud 의 BigQuery 로 주기적으로 옮기는 데이터 파이프라인을 만드는데 많은 시간을 썼었습니다. 한번 작업을 마치고 나니 상당히 전형적인 작업이라는 생각이 들었습니다. 그래서 Best Practices 에 대해 생각해보고 있습니다.
