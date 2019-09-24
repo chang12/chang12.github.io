@@ -1,10 +1,7 @@
 ---
 layout: post
-title: SageMaker Get Started 에 더하여 - API Gateway, Lambda 로 배포
-tags:
-  - SageMaker
-  - API Gateway
-  - Lambda
+title: SageMaker Get Started 에 더하여 : API Gateway, Lambda 로 배포
+tags: [SageMaker, API Gateway, Lambda]
 ---
 
 ML 모델을 서비스로 배포하려면 어떻게 하는게 좋을지 궁금해졌습니다. AWS 에는 [Amazon SageMaker](https://aws.amazon.com/ko/sagemaker/) 가 있고, GCP 에는 [AI Platform](https://cloud.google.com/ai-platform/?hl=ko) 이 있습니다. 둘 다 궁금한데 우선 AWS 쪽 부터 파봅니다.
