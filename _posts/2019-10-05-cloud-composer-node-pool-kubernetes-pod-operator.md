@@ -40,7 +40,7 @@ Kubernetes Engine Console 의 Clusters 탭에서 Environment 가 띄운 Cluster 
 
 ## DAG 추가
 
-[Pod Affinity Configuration](https://cloud.google.com/composer/docs/how-to/using/using-kubernetes-pod-operator#affinity-config) 문서의 코드를 참고해서 DAG 를 선언합니다. Task 실행을 위한 Pod 이, 방금 만든 **pool-1** node pool 에 뜰 수 있도록, `affinity` argument 를 넘깁니다.
+[Pod Affinity Configuration](https://cloud.google.com/composer/docs/how-to/using/using-kubernetes-pod-operator#affinity-config) 문서의 코드를 참고해서 DAG 를 선언합니다. Task 실행을 위한 Pod 이 방금 만든 **pool-1** node pool 에 뜰 수 있도록, `affinity` argument 를 넘깁니다.
 
 ```python
 from datetime import datetime, timedelta
