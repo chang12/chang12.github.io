@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cloud Composer 에서 Node Pool 과 KubernetesPodOperator 로 독립된 Task 실행 환경 구성"
+title: "Node Pool 로 KubernetesPodOperator 를 위한 독립된 실행 환경 구성하기"
 tags: [Cloud Composer, Kubernetes]
 ---
 
