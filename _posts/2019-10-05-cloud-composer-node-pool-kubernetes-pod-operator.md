@@ -138,7 +138,7 @@ kube-system		6m43s   Normal    ScaleDownEmpty              ConfigMap   Scale-dow
 kube-system		6m37s   Normal    ScaleDownEmpty              ConfigMap   Scale-down: empty node gke-us-central1-[...] removed
 ```
 
-크게 보면, DAG 의 Task 실행을 위한 Pod 요청 -> Node Group 의 size : 0 라서 Scale Up -> Pod Scheduling -> 요청된 Pod 완료 -> 일정 시간 (약 10분?) 동안 Node Group 에 대한 Pod 요청이 없으므로 Scale Down 이 발생하는 것으로 보입니다. 다만 맨 처음에 scale-up 이 실패했고, 이후 성공 event 가 없는데도 Scale Up 은 잘 됬다는 게 의아합니다. 이러한 Autoscaling 은 [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) 가 담당하는데, 이에 대해서는 더 자세히 알아보고 후속 블로그 글을 적을 생각입니다.
+크게 보면, DAG 의 Task 실행을 위한 Pod 요청 -> Node Group 의 size : 0 라서 Scale Up -> Pod Scheduling -> 요청된 Pod 완료 -> 일정 시간 (약 10분?) 동안 Node Group 에 대한 Pod 요청이 없으므로 Scale Down 이 발생하는 것으로 보입니다. 다만 맨 처음에 scale-up 이 실패했고, 이후 성공 event 가 없는데도 Scale Up 은 잘 됬다는 게 의아합니다. 이러한 Autoscaling 은 [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler) 가 담당하는데, 더 알아보고 이를 후속 블로그 글의 주제로 삼을 계획입니다.
 
 ## 레퍼런스
 
