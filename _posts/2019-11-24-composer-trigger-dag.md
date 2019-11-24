@@ -102,10 +102,10 @@ import requests
 web_server_id = '<web_server_id>'  # Airflow Web Server = https://<web_server_id>.appspot.com
 dag_name = 'dag_trigger_test'
 url = f'https://{web_server_id}.appspot.com/api/experimental/dags/{dag_name}/dag_runs'
+# 획득한 OpenID Connect token 을 Bearer token 으로.
 headers = {'Authorization': f'Bearer {google_open_id_connect_token}'
 data = {'conf': {'date_kr': '2019-11-24'}}
 
-# 획득한 OpenID Connect token 을 Bearer token 으로.
 resp = requests.request('POST', url, headers=headers, json=data)
 
 if resp.status_code == 403:
