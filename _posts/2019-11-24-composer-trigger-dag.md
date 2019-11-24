@@ -115,7 +115,7 @@ elif resp.status_code != 200:
     raise Exception(f'Bad response from application: {resp.status_code} / {resp.headers} / {resp.text}')
 ```
 
-실행 후 Airflow Web Server 에 접속해서 Task Log 를 보니, DAG 가 정상적으로 실행되었습니다.
+실행 후 Airflow Web Server 에 접속해서 Task Log 를 확인해보니, DAG 가 정상적으로 실행되었습니다.
 
 ```
 [2019-11-24 09:10:50,581] {base_task_runner.py:101} INFO - Job 45968: Subtask test [2019-11-24 09:10:50,578] {bash_operator.py:101} INFO - Temporary script location: /tmp/airflowtmp27x0r093/testb_o3ycl3
