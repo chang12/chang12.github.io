@@ -30,18 +30,17 @@ with models.DAG('dag_trigger_test',
 
 ## Cloud IAP 와 Client ID
 
-[Overview of Cloud Composer 문서의 아키텍처 그림](https://cloud.google.com/composer/docs/concepts/overview#architecture) 을 보면, Airflow Web Server 에 접속하기 위한 인증은 Cloud IAP (Identity-Aware Proxy) 로 관리되고 있습니다.
+[Overview of Cloud Composer 문서의 아키텍처 그림](https://cloud.google.com/composer/docs/concepts/overview#architecture) 을 보면, Airflow Web Server 에 접속하기 위한 인증은 Cloud IAP (Identity-Aware Proxy) 가 관리합니다.
 
 <p align="center"><img src="https://cloud.google.com/composer/docs/images/architecture.svg"/></p>
 
-[Cloud IAP 문서](https://cloud.google.com/iap/docs/authentication-howto#authenticating_from_a_service_account) 를 보니, Cloud IAP 로 관리되는 resource 에 접속하기 위한 인증을 위해서 resource 의 Client ID 가 필요합니다. 우리가 소유한 Project 의 resource 라면 Cloud IAP Console 에서 Client ID 를 획득할 수 있습니다. 하지만 아키텍처 그림을 보면, Cloud Composer 로 생성한 Airflow Web Server 는 우리가 소유한 Project 가 아니라 GCP 에서 관리하는 Tenant Project 의 App Engine 에 배포됩니다. 그래서 [Getting the client ID](https://cloud.google.com/composer/docs/how-to/using/triggering-with-gcf#getting_the_client_id) 문서에서도, 인증되지 않은채로 resource 에 접속했을 때 리다이렉트 되는 URL 에서 Client ID 를 알아내는 우회적인 방법을 소개합니다. 문서에서는 Python 코드를 소개하지만, 코드 없이 브라우저에서도 값을 알아낼 수 있습니다. Gmail 로그인 되지 않은 채로 브라우저에서 Airflow Web Server 에 접속하면, Gmail 로그인 페이지로 리다이렉트 되는데, 이때 주소의 `client_id` query parameter 가 Client ID 입니다.
+[Cloud IAP 문서](https://cloud.google.com/iap/docs/authentication-howto#authenticating_from_a_service_account) 를 보니, Cloud IAP 가 관리하는 resource 에 접속하기 위해 인증할 때 resource 의 Client ID 가 필요합니다. 우리가 소유한 Project 의 resource 라면 Cloud IAP Console 에서 Client ID 를 획득할 수 있습니다. 하지만 아키텍처 그림에서 보이듯이, Cloud Composer 로 생성한 Airflow Web Server 는 GCP 에서 관리하는 Tenant Project 의 App Engine 에 배포됩니다. 
 
-- `https://<webserver_id>.appspot.com/` 에 접속
-- `https://accounts.google.com/signin/oauth/identifier?client_id=<client_id>&...` 에서 Client ID 획득
+그래서 [Getting the client ID](https://cloud.google.com/composer/docs/how-to/using/triggering-with-gcf#getting_the_client_id) 문서에서도, 인증 없이 resource 접속 -> 리다이렉트 -> 리다이렉트된 URL 에서 Client ID 를 알아내는 우회적인 방법을 소개합니다. 문서에서는 Python 코드를 소개하지만, 코드 없이 브라우저에서도 값을 알아낼 수 있습니다. Gmail 로그아웃 후 브라우저에서 Airflow Web Server 에 접속하면 -> Gmail 로그인 페이지로 리다이렉트 되는데 -> 이때 리다이렉트 된 URL 의 `client_id` query parameter = Client ID 입니다.
 
 ## Service Account
 
-외부 클라이언트는 Service Account 의 JSON Key 파일을 사용해서 인증하게 됩니다. Composer 가 관리하는 resource 에 접속할 수 있는 Role 이 필요할텐데, [Overview of Cloud Composer](https://cloud.google.com/composer/docs/concepts/overview#app-engine) 문서에서 `Composer User` Role 을 주면 된다고 소개합니다.
+외부 클라이언트는 Service Account 의 JSON Key 파일을 사용해서 인증합니다. Composer 가 관리하는 resource 에 접속할 수 있는 Role 이 필요할텐데, [Overview of Cloud Composer](https://cloud.google.com/composer/docs/concepts/overview#app-engine) 문서에서 `Composer User` Role 을 주면 된다고 소개합니다.
 
 > To grant access only to the Airflow web server, you can assign the composer.user role, or you can assign different Cloud Composer roles that provide access to other resources in your environment.
 
