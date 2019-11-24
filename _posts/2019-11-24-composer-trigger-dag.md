@@ -25,7 +25,7 @@ with models.DAG('dag_trigger_test',
     a = BashOperator(task_id='test',
                      # DAG 실행에 필요한 설정값을 REST API 호출 때 HTTP Body 에 적어주면,
                      # Airflow 의 Jinja Templating 의 Variable 을 통해 획득할 수 있습니다.
-                     bash_command='echo date_kr : {{ dag_run.conf.get("date_kr") }}')
+                     bash_command='echo date_kr : {{ dag_run.conf.get("date_kr1") }}')
 ```
 
 ## Cloud IAP 와 Client ID
