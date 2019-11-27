@@ -15,3 +15,5 @@ permalink: /about/
 [쇼미더머니 7 나플라 @래퍼평가전](https://tv.naver.com/v/3998689)
 
 [리버풀 우승의 시작! [부제: 이스탄불의 기적을 재현한 안필드의 기적이자 리버풀 입덕 영상]](https://www.youtube.com/watch?v=LRdIgwiPH0g)
+
+[[풀버전] ♬ 싫다고 말해(Nightmare Ver.) - (여자)아이들 @3차 경연 컴백전쟁 : 퀸덤 8화](https://www.youtube.com/watch?v=QTjZJzYWzEU)

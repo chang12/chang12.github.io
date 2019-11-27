@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Cloud Composer 에서 Airflow Web Server REST API 로 외부에서 DAG 트리거하기"
-tags: [Cloud Composer, Airflow]
+tags: [Cloud Composer, Apache Airflow]
 ---
 
 이전까지는 생성자에 `schedule_interval` 을 적어서 DAG 를 주기적으로 실행했습니다. 그러던 중 Airflow 외부의 배치 프로그램이 끝날 때 마다 DAG 를 Trigger 하고 싶은 상황이 생겼습니다. 방법을 찾아보다가 [Triggering DAGs (workflows)](https://cloud.google.com/composer/docs/how-to/using/triggering-with-gcf) 문서를 발견했고 적용해봤습니다. 

@@ -1,11 +1,7 @@
 ---
 layout: post
 title: Airflow 에 PostgresToS3Operator 만들기
-tags:
-  - aws
-  - airflow
-  - postgres
-  - s3
+tags: [Apache Airflow, AWS]
 ---
 
 ETL 작업을 어떻게 관리하는게 좋을지 고민입니다. 검색했을 때나 주변 분들 얘기를 들어봤을 때 [Apache Airflow](https://airflow.apache.org/) 가 많이 쓰이는 것 같습니다. 매니지드 서비스로는 GCP 에서는 [Cloud Composer](https://cloud.google.com/composer/), AWS 에서는 [AWS Data Pipeline](https://aws.amazon.com/ko/datapipeline/) 가 있습니다. 업무 인프라의 대부분이 AWS 라서 Data Pipeline 에 눈이 갔는데 아쉽게도 서울 리전에는 아직 제공되지 않습니다.

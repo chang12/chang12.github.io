@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Cloud Composer 시작하기
-tags: [Cloud Composer, Airflow]
+tags: [Cloud Composer, Apache Airflow]
 ---
 
 회사 업무때 OLAP 로 BigQuery 를 쓰고 있습니다. 그래서 ETL 작업을 크게 **BigQuery 로 옮기는 작업**과, **BigQuery 내에서의 작업**으로 두 종류로 나눌 수 있습니다. 현재는 두 종류 작업 모두 Apache Spark 에 의존하는 Scala 코드로 작성되어 있고, Amazon EMR 클러스터에 `spark-submit` 로 제출되어 실행됩니다. 그런데 BigQuery 내에서의 작업은 컴퓨팅 자원이 적게 들기 때문에 굳이 Apache Spark 에 의존할 필요가 없고, 데이터 분석가 분들도 작업을 기술할 수 있도록 Python 코드로 작성되면 좋을 것 같습니다. 그래서 Apache Airflow 를 쓰면 좋겠다는 생각이 들었고, Google Cloud 가 제공하는 Managed Airflow 서비스인 [Cloud Composer](https://cloud.google.com/composer/) 를 써보려고 합니다.

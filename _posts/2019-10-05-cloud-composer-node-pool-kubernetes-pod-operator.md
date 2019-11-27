@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Node Pool 로 KubernetesPodOperator 를 위한 독립된 실행 환경 구성하기"
-tags: [Cloud Composer, Airflow, Kubernetes]
+tags: [Cloud Composer, Apache Airflow, Kubernetes]
 ---
 
 Cloud Composer 를 써보기 위해 Environment 를 만들 때, Worker nodes 의 Node count 와 Machine type 값을 어떻게 줄 지 고민했습니다. 넉넉한 걸로 하자니 비용이 아까웠고, 작은 걸로 하자니 이후 resource 가 많이 필요한 task 를 실행할 수도 있을 것 같아 망설여집니다. Environment 생성 후에 Machine type 을 바꾸려면 [Upgrading the machine type](https://cloud.google.com/composer/docs/how-to/managing/updating#upgrading_the_machine_type) 문서에서 소개하는, default-pool 을 없애고 새로 만드는 방법을 써야 하는데, 그 동안 task 실행이 중단되는 것도 그렇고 그리 매력적이지 않습니다. [Upgrading the machine type](https://cloud.google.com/composer/docs/how-to/managing/updating#upgrading_the_machine_type) 문서에서도 처음 Environment 를 생성할 때 machine type 을 잘 선택하고, resource 가 많이 필요한 task 를 실행하고 싶으면 [GKEPodOperator](https://github.com/apache/airflow/blob/master/airflow/contrib/operators/gcp_container_operator.py) 를 쓰라고 얘기합니다.
