@@ -1,8 +1,7 @@
 ---
 layout: post
 title: Daemon Thread 란?
-tags:
-  - jvm
+tags: [JVM]
 ---
 
 gRPC 홈페이지의 [gRPC ❤ Kotlin](https://grpc.io/blog/kotlin-gradle-projects) 블로그 글의 [example 코드를](https://github.com/grpc/grpc-java/blob/60a0b0c471d720b0546ee3a5b4fa4283635dfbcf/examples/src/main/java/io/grpc/examples/helloworld/HelloWorldServer.java#L58-L60) 읽다가, `Await termination on the main thread since the grpc library uses daemon threads.` 라는 주석을 읽고, `daemon thread` 라는게 무엇인지 궁금해졌습니다.
