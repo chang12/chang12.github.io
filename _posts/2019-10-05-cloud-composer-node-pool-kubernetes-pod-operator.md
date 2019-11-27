@@ -146,3 +146,12 @@ kube-system		6m37s   Normal    ScaleDownEmpty              ConfigMap   Scale-dow
 - [Cloud Composer 문서 중 Using the KubernetesPodOperator](https://cloud.google.com/composer/docs/how-to/using/using-kubernetes-pod-operator)
 - [Kubernetes Engine 문서 중 Node pools](https://cloud.google.com/kubernetes-engine/docs/concepts/node-pools)
 - [Kubernetes Engine 문서 중 Cluster autoscaler](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler)
+
+***
+
+#### Cloud Composer 관련 다른 포스트
+
+- [Cloud Composer 시작하기](https://chang12.github.io/cloud-composer-start/)
+- [Cloud Composer 를 업무에 처음 도입하며 정리한 몇가지 생각들](https://chang12.github.io/cloud-composer-some-thought/)
+- Node Pool 로 KubernetesPodOperator 를 위한 독립된 실행 환경 구성하기
+- [Cloud Composer 에서 Airflow Web Server REST API 로 외부에서 DAG 트리거하기](https://chang12.github.io/composer-trigger-dag/)

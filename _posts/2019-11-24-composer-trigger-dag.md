@@ -133,3 +133,12 @@ elif resp.status_code != 200:
 - [Cloud IAP Programmatic authentication](https://cloud.google.com/iap/docs/authentication-howto#authenticating_from_a_service_account)
 - [python-docs-samples repository 의 composer\_storage\_trigger.py](https://github.com/GoogleCloudPlatform/python-docs-samples/blob/cf121715f3bd6d1f0916b966bfcaf0dcf769cd1a/functions/composer/composer_storage_trigger.py)
 - [Preparing to make an authorized API call](https://developers.google.com/identity/protocols/OAuth2ServiceAccount#authorizingrequests)
+
+***
+
+#### Cloud Composer 관련 다른 포스트
+
+- [Cloud Composer 시작하기](https://chang12.github.io/cloud-composer-start/)
+- [Cloud Composer 를 업무에 처음 도입하며 정리한 몇가지 생각들](https://chang12.github.io/cloud-composer-some-thought/)
+- [Node Pool 로 KubernetesPodOperator 를 위한 독립된 실행 환경 구성하기](https://chang12.github.io/cloud-composer-node-pool-kubernetes-pod-operator/)
+- Cloud Composer 에서 Airflow Web Server REST API 로 외부에서 DAG 트리거하기

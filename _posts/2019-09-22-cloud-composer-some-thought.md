@@ -140,3 +140,12 @@ def task_fail_slack_alert(context):
 
 - [Slack API 문서 중 Incoming Webhooks](https://api.slack.com/incoming-webhooks)
 - [Integrating Slack Alerts in Airflow](https://medium.com/datareply/integrating-slack-alerts-in-airflow-c9dcd155105)
+
+***
+
+#### Cloud Composer 관련 다른 포스트
+
+- [Cloud Composer 시작하기](https://chang12.github.io/cloud-composer-start/)
+- Cloud Composer 를 업무에 처음 도입하며 정리한 몇가지 생각들
+- [Node Pool 로 KubernetesPodOperator 를 위한 독립된 실행 환경 구성하기](https://chang12.github.io/cloud-composer-node-pool-kubernetes-pod-operator/)
+- [Cloud Composer 에서 Airflow Web Server REST API 로 외부에서 DAG 트리거하기](https://chang12.github.io/composer-trigger-dag/)
