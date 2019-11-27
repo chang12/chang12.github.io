@@ -1,10 +1,7 @@
 ---
 layout: post
 title: OSX 에서 Python LightGBM 패키지 설치때 고생한 경험
-tags:
-  - osx
-  - lightgbm
-  - docker
+tags: [Docker]
 ---
 
 오랜만에 Python 으로 작성된 프로젝트의 개발 환경을 설정할 일이 있었습니다. virtualenv 를 만들고, `pip -r requirements.txt` 로 의존하는 패키지들을 설치하고 ([lightgbm](https://pypi.org/project/lightgbm/) 포함), 예시 명령어를 실행하는 데 에러가 발생했습니다. `lightgbm` 을 초기화 하는 부분입니다.
