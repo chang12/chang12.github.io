@@ -1,10 +1,7 @@
 ---
 layout: post
 title: Python 으로 지도 위에 정사각 격자를 그리려면?
-tags:
-  - map
-  - folium
-  - pyproj
+tags: [Geography]
 ---
 
 Python 으로 지도 위에 정사각 격자를 그리려고 합니다. 정확히는 서울시를 1km x 1km 크기의 정사각 격자로 나누려고 합니다.

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MySQL 의 Geospatial Index (2)
-tags: [MySQL]
+tags: [MySQL, Geography]
 ---
 
 이전 글인 [MySQL 의 Geospatial Index (1)](https://chang12.github.io/mysql-geospatial-index-1/) 에서 MySQL 5.7.5 버전의 InnoDB 스토리지 엔진부터 지원하는 geospatial index 를 활용해서 쿼리 속도를 높히는 방법에 대해 알아봤었습니다. 이번 글에서는 작성 시점 기준으로 최신 메이저 버전인 MySQL 8.0 에서 어떤 차이가 있는지 알아보겠습니다.

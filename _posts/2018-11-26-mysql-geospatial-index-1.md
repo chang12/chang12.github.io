@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MySQL 의 Geospatial Index (1)
-tags: [MySQL]
+tags: [MySQL, Geography]
 ---
 
 [MySQL InnoDB 스토리지 엔진은 버전 5.7.5 부터 geospatial index 를 지원합니다.](https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-5.html) geospatial index 를 사용하고, where 절의 조건을 적절히 설정하면 쿼리 속도를 높힐 수 있습니다. 간단한 위도/경도 샘플 데이터를 생성해서 테이블을 만들고, 특정 위치로 부터 특정 거리 이내에 존재하는 레코드의 개수를 세는 간단한 쿼리에 대해 성능이 어떻게 개선되는지 확인해보겠습니다.
