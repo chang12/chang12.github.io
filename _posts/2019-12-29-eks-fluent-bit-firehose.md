@@ -394,7 +394,7 @@ Kubernetes Filter 를 쓸 경우 `Merge_Log` 를 Off -> On 하면 `log` key 값�
 
 > When enabled, it checks if the `log` field content is a JSON string map, if so, it append the map fields as part of the log structure.
 
-`Keep_Log` 를 On -> Off 해서 기존의 encoded string 의 `log` key 는 제거하고, `Merge_Log_Key` 를 log 로 줘서, JSON 으로 디코딩한 값을 `log` key 의 값으로 넣습니다.
+`Keep_Log` 를 On -> Off 해서 기존의 encoded string 의 `log` key 는 제거하고, `Merge_Log_Key` 를 log 로 줘서, JSON 으로 디코딩한 값을 새로운 `log` key 의 값으로 넣습니다. 이어지는 `record_modifier` 와 `nest` 설정은 앞에서와 동일합니다.
 
 ```
 [FILTER]
@@ -403,9 +403,18 @@ Kubernetes Filter 를 쓸 경우 `Merge_Log` 를 Off -> On 하면 `log` key 값�
     Merge_Log         On
     Keep_Log          Off
     Merge_Log_Key     log
+[FILTER]
+    Name              record_modifier
+    Match             kube.*
+    Whitelist_key     log
+[FILTER]
+    Name              nest
+    Match             kube.*
+    Operation         lift
+    Nested_under      log    
 ```
 
-결과는 동일합니다.
+동일한 결과를 확인할 수 있습니다.
 
 ```
 {"name":"fakenerd","time_ms":1577622955572}
