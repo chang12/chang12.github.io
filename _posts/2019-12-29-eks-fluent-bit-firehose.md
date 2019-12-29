@@ -14,11 +14,11 @@ tags: [Kubernetes, AWS, Fluent Bit]
 
 ### S3 Bucket
 
-Firehose delivery stream 이 로그를 파일로 쌓을 S3 Bucket 을 생성합니다. `eks-fluent-bit-study` 정도의 이름으로 만들었습니다.
+Firehose delivery stream 이 로그를 쌓을 S3 Bucket 을 생성합니다. `eks-fluent-bit-study` 정도의 이름으로 만들었습니다.
 
 ### Kinesis Firehose delivery stream
 
-Source 는 Direct Put + 생성한 S3 Bucket 을 Destination 으로 delivery stream 을 생성합니다. Buffer size / interval 모두 최소값으로 해서 나중에 S3 에 쌓인 파일을 가능한 빠르게 확인할 수 있게 합니다.
+Source 는 Direct Put + Destination 은 방금 생성한 S3 Bucket 으로 해서 delivery stream 을 생성합니다. Buffer size / interval 모두 최소값으로 해서 나중에 S3 에 쌓인 파일을 가능한 빠르게 확인할 수 있게 합니다.
 
 - **Delivery stream name** : eks-fluent-bit-study
 - **Source** : Direct PUT
@@ -131,7 +131,7 @@ python-app-7cd4ffbdc7-mfz7g   1/1     Running   0          8s
 Node Group 생성할 때 Key Pair 를 지정했으므로 SSH 로 Node 에 접속할 수 있습니다.
 
 ```
-ssh -i <path-to-key-pair> ec2-user@<public-dns-of-node>
+ssh -i <path-to-private-key> ec2-user@<public-dns-of-node>
 ```
 
 `/var/log/containers` 경로 아래 `python-app` 으로 시작하는 파일을 확인할 수 있습니다. 출력해보면 Pod 의 Process 에서 stdout 으로 출력한 로그를 담고 있습니다.
@@ -145,7 +145,7 @@ $ tail -f /var/log/containers/python-app-xxx.log
 
 SSH 로 접속하지 않고 kubectl 로 확인할 수도 있습니다. 출력에 적혀있듯이 Deployment 의 Pod 2개 중 하나를 골라서 보여줍니다. [Logging Architecture](https://kubernetes.io/docs/concepts/cluster-administration/logging/) 문서에 따르면 결국 이 출력도 위에서 확인한 로그 파일을 읽어 보여준 것입니다.
 
-> When you run kubectl logs as in the basic logging example, the kubelet on the node handles the request and reads directly from the log file, returning the contents in the response.
+> When you run kubectl logs as in the basic logging example, the kubelet on the node handles the request and reads directly from the **log file**, returning the contents in the response.
 
 ```
 $ kubectl logs -f deployment/python-app --since 1s
@@ -234,7 +234,7 @@ spec:
 ```
 
 - AWS 블로그 글을 따라서 [amazon/aws-for-fluent-bit](https://github.com/aws/aws-for-fluent-bit) 이미지를 사용합니다. [AWS 서비스들에 대한 Output Plugin 들을](https://github.com/aws/aws-for-fluent-bit#plugins) 포함하여 빌드한 이미지라 편리합니다. 덕분에 `firehose` output plugin 을 사용할 수 있습니다. 블로그 글에서는 1.2.0 버전을 쓰지만, 이 글을 쓰는 시점에서 최신인 2.1.0 버전으로 올렸습니다. 
-- 앞서 Node 에 SSH 로 접속해서 `/var/log/containers` 경로 아래 로그 파일들을 조회했습니다. Fluent Bit 가 해당 경로를 조회할 수 있도록 `hostPath` 를 마운트 합니다. ConfigMap 으로 관리하는 Fluent Bit 설정 파일들도 (`fluent-bit-config`) 마운트 합니다.
+- 앞서 Node 에 SSH 로 접속해서 `/var/log/containers` 경로 아래 로그 파일들을 조회했습니다. Fluent Bit 이 해당 경로를 조회할 수 있도록 `hostPath` 를 마운트 합니다. ConfigMap 으로 관리하는 Fluent Bit 설정 파일들도 (`fluent-bit-config`) 마운트 합니다.
 
 ### ConfigMap
 
@@ -312,7 +312,7 @@ Fluent Bit 가 로그 파일을 읽은 뒤 쓸 Parser 가 필요합니다. [Pars
     Time_Keep         On
 ```
 
-INPUT, OUTPUT Plugin 은 일단 앞서 언급한 [Centralized Container Logging with Fluent Bit](https://aws.amazon.com/blogs/opensource/centralized-container-logging-fluent-bit/) 의 내용을 그대로 옮겨오고 파일 경로와 delivery stream 값만 바꿉니다.
+INPUT, OUTPUT Plugin 은 일단 앞서 언급한 [Centralized Container Logging with Fluent Bit](https://aws.amazon.com/blogs/opensource/centralized-container-logging-fluent-bit/) 의 내용을 그대로 옮겨오고 파일 경로와 delivery stream 값만 바꿔줍니다.
 
 ```
 [INPUT]
