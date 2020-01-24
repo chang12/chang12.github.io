@@ -17,3 +17,5 @@ permalink: /about/
 [리버풀 우승의 시작! [부제: 이스탄불의 기적을 재현한 안필드의 기적이자 리버풀 입덕 영상]](https://www.youtube.com/watch?v=LRdIgwiPH0g)
 
 [[풀버전] ♬ 싫다고 말해(Nightmare Ver.) - (여자)아이들 @3차 경연 컴백전쟁 : 퀸덤 8화](https://www.youtube.com/watch?v=QTjZJzYWzEU)
+
+[미드나잇 인 서울](https://limyoungjoo.com/post/188895802826/%EB%AF%B8%EB%93%9C%EB%82%98%EC%9E%87-%EC%9D%B8-%EC%84%9C%EC%9A%B8)
