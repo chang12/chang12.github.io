@@ -4,7 +4,7 @@ title: "Cloud Run 과 Cloud Scheduler 로 주기적인 작업 실행하기"
 tags: [GCP]
 ---
 
-글또 4기 활동을 하면서는, 운영진 팀 2개 중 운영 자동화 팀의 일원으로도 활동합니다. 글 제출/피드백 여부 확인, 리뷰어 지정 등의 글또 운영 업무를 자동화 하는 [genie](https://github.com/geultto/genie) 프로젝트를 관리하고 개선하는 것이 운영 자동화 팀의 역할입니다. 그 일환으로 주기적으로 Slack API 로 데이터를 받아와서 (글또 활동은 Slack 에서 이뤄짐) BigQuery 에 넣는 작업을 실행해야 합니다.
+글또 4기 활동을 하면서는, 운영진 팀 2개 중 운영 자동화 팀의 일원으로도 활동합니다. 글 제출/피드백 여부 확인, 리뷰어 지정 등의 글또 운영 업무를 자동화 하는 [genie](https://github.com/geultto/genie) 프로젝트를 관리하고 개선하는 것이 운영 자동화 팀의 역할입니다. 그 일환으로 주기적으로 Slack API 로 데이터를 받아와서 (글또 활동은 Slack 에서 이뤄짐) 처리하는 작업을 실행해야 합니다.
 
 찾아보니 GCP 의 서비스들 중 Cloud Run 으로 작업을 배포하고, Cloud Scheduler 로 주기적으로 실행하면 될 것 같습니다. [Running services on a schedule](https://cloud.google.com/run/docs/triggering/using-scheduler) 에서 개괄적인 내용을 확인할 수 있습니다.
 
