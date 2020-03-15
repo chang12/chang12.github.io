@@ -16,7 +16,7 @@ Cloud Scheduler 가 Cloud Run 의 Service 를 호출할 때 인증에 쓸 IAM Se
 gcloud iam service-accounts create fakenerd-cloud-scheduler
 ```
 
-생성된 Service Account 의 이메일 주소를 확인합니다. 이후 Cloud Run 에 IAM Policy Binding 을 추가할 때 필요합니다.
+만들어진 Service Account 의 이메일을 확인합니다. 이후 Service 에 IAM Policy Binding 을 추가할 때 사용합니다.
 
 ```
 gcloud iam service-accounts list | grep fakenerd-cloud-scheduler
