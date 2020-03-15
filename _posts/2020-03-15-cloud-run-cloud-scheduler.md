@@ -24,7 +24,7 @@ gcloud iam service-accounts list | grep fakenerd-cloud-scheduler
 
 ## Cloud Run Service 생성
 
-[Cloud Run 서비스 소개 페이지를](https://cloud.google.com/run) 보면 **'Cloud Run is a fully managed compute platform that automatically scales your stateless containers.'** 라고 소개합니다. 원하는 작업을 코드로 기술하고 Dockerfile 만 작성해주면 Container 를 운영하는 기반 작업은 Cloud Run 이 해줍니다.
+[Cloud Run 페이지를](https://cloud.google.com/run) 보면 **'Cloud Run is a fully managed compute platform that automatically scales your stateless containers.'** 라고 소개합니다. 원하는 작업을 코드로 기술하고 Dockerfile 만 작성해주면 Container 를 운영하는 기반 작업은 Cloud Run 이 해줍니다.
 
 [Quickstart: Deploy a Prebuilt Sample Container](https://cloud.google.com/run/docs/quickstarts/prebuilt-deploy) 문서의 내용을 gcloud 명령어로 옮긴 아래 명령어를 실행해서 Cloud Run 에 Service 를 배포할 수 있습니다. GCP 에서 준비해준 gcr.io/cloudrun/hello image 에 대해서는 [GoogleCloudPlatform/cloud-run-hello](https://github.com/GoogleCloudPlatform/cloud-run-hello) repo 에서 코드를 확인할 수 있습니다.
 
@@ -60,7 +60,7 @@ gcloud run services add-iam-policy-binding prebuilt \
 
 ## Cloud Scheduler Job 생성
 
-[Cloud Scheduler 서비스 소개 페이지를](https://cloud.google.com/scheduler) 보면 **'Cloud Scheduler is a fully managed enterprise-grade cron job scheduler.'** 라고 소개합니다. [Cloud Scheduler overview](https://cloud.google.com/scheduler/docs) 문서를 보면 HTTP/S endpoints, Pub/Sub topics, App Engine applications 으로 3가지 Target 이 가능합니다. Cloud Run Service 를 호출하는 것이 목적이므로 HTTP/S endpoints 를 Target 으로 Job 을 만듭니다. Job 이름, 원하는 cron 주기, 호출할 Cloud Run Service 의 Endpoint, 인증에 쓸 Service Account 를 적어주면 됩니다. 빠른 테스트를 위해 최소 간격인 매분 실행으로 설정합니다.
+[Cloud Scheduler 페이지를](https://cloud.google.com/scheduler) 보면 **'Cloud Scheduler is a fully managed enterprise-grade cron job scheduler.'** 라고 소개합니다. [Cloud Scheduler overview](https://cloud.google.com/scheduler/docs) 문서를 보면 HTTP/S endpoints, Pub/Sub topics, App Engine applications 으로 3가지 Target 이 가능합니다. Cloud Run Service 를 호출하는 것이 목적이므로 HTTP/S endpoints 를 Target 으로 Job 을 만듭니다. Job 이름, 원하는 cron 주기, 호출할 Cloud Run Service 의 Endpoint, 인증에 쓸 Service Account 를 적어주면 됩니다. 빠른 테스트를 위해 최소 간격인 매분 실행으로 설정합니다.
 
 ```
 gcloud scheduler jobs create http trigger-cloud-run \
