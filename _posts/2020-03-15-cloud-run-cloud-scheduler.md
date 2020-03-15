@@ -36,7 +36,7 @@ gcloud run deploy prebuilt \
     --region us-central1
 ```
 
-터미널에서 명령어를 실행하고 배포가 완료되면 Service 의 URL 을 확인할 수 있습니다. 이후 Cloud Scheduler Job 을 만들 때 필요합니다.
+배포가 완료되면 Service 의 URL 을 확인할 수 있습니다. 이후 Cloud Scheduler Job 을 만들 때 필요합니다.
 
 ```
 Deploying container to Cloud Run service [prebuilt] in project [...] region [us-central1]
