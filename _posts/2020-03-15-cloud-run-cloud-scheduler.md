@@ -73,7 +73,7 @@ gcloud scheduler jobs create http trigger-cloud-run \
 
 ## 확인
 
-Cloud Run Console 에서 prebuilt Service 의 LOGS 탭을 보면, Cloud Scheduler 가 성공적으로 HTTP 요청한 것을 확인할 수 있습니다.
+Console 에서 Service 의 LOGS 탭을 보면, HTTP 호출이 성공한 것을 확인할 수 있습니다.
 
 ![2020-03-15-cloud-run-logs.png](https://raw.githubusercontent.com/chang12/chang12.github.io/88ffd9973f513063a85219a4823fcd86af9b19e0/images/2020-03-15-cloud-run-logs.png)
 
