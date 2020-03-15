@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Cloud Run 과 Cloud Scheduler 로 주기적인 작업 실행하기"
+title: "Cloud Run 과 Cloud Scheduler 로 주기적인 작업 실행"
 tags: [GCP]
 ---
 
