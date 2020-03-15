@@ -10,7 +10,7 @@ tags: [GCP]
 
 ## IAM 에서 Service Account 생성
 
-Cloud Scheduler 가 Cloud Run 의 Service 를 호출하기 위한 인증에 사용할 IAM Service Account 가 필요합니다.
+Cloud Scheduler 가 Cloud Run 의 Service 를 호출할 때 인증에 쓸 IAM Service Account 가 필요합니다.
 
 ```
 gcloud iam service-accounts create fakenerd-cloud-scheduler
