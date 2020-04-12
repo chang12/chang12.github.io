@@ -97,7 +97,7 @@ aws rds create-db-instance \
 mysql -h <AURORA_ENDPOINT> -u admin -p --local-infile fakenerd
 ```
 
-테이블을 생성합니다. CSV 파일의 Header 의 컬럼 이름에는 공백이나 `.` 가 포함된 경우가 있지만, 테이블 만들 때는 없앱니다. 그렇게 하지 않으면 이후 Export Task 를 실행했을 때 **COLUMN\_WITH\_UNSUPPORTED\_CHARACTER\_IN\_NAME** Reason 으로 테이블이 Skip 되거나, 빈 Parquet 파일이 만들어집니다.
+테이블을 생성합니다. CSV 파일의 Header 의 컬럼 이름에는 공백이나 `.` 가 포함된 경우가 있지만, 테이블 만들 때는 없앱니다. 그렇게 하지 않으면 이후 Export Task 를 실행했을 때 **COLUMN WITH UNSUPPORTED CHARACTER IN NAME** Reason 으로 테이블이 Skip 되거나, 빈 Parquet 파일이 만들어집니다.
 
 ```sql
 create table measurement_summary (
