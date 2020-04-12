@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Aurora MySQL Snapshot 을 S3 에 Parquet 로 Export"
+title: "Aurora MySQL 스냅샷을 Parquet 로 S3 에 Export"
 tags: [AWS]
 ---
 
