@@ -277,7 +277,9 @@ $ head output.csv
 
 ## 마치며
 
-이제 데이터베이스에 부하를 주지 않으며 Parquet Format 으로 S3 에 데이터를 Export 할 수 있게 되었습니다. Export 에 이어 Glue Crawler/Athena 를 잘 엮어주면, OLTP 데이터를 S3 에 Data Lake 로 만들고, 이를 SQL 로 분석할 수 있는 환경을 서버리스하게 구성할 수 있어 좋아보입니다. 다만 늘 테이블 전체를 다뤄야 하고, Incremental 하게 처리할 수 없다는 점은 아쉽습니다. 현재 CSV/TEXT Format 만 가능한 [SELECT INTO OUTFILE S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.SaveIntoS3.html) 에도 Parquet Format 이 추가되면 좋겠네요.
+이제 데이터베이스에 부하를 주지 않으며 Parquet Format 으로 S3 에 데이터를 Export 할 수 있게 되었습니다. Export 에 이어 Glue Crawler/Athena 를 잘 엮어주면, OLTP 데이터를 S3 에 Data Lake 로 만들고, 이를 SQL 로 분석할 수 있는 환경을 서버리스하게 구성할 수 있어 좋아보입니다. 
+
+다만 테이블 전체를 Export 할 수 밖에 없고, Incremental 하게 처리할 수 없다는 점은 아쉬운 부분입니다. 아마도 1회성 Export 혹은 Export 한 뒤 후처리가 이어지는 상황을 가정한 것으로 보입니다. 현재 CSV/TEXT Format 만 가능한 [SELECT INTO OUTFILE S3](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.SaveIntoS3.html) 에도 Parquet Format 이 추가되면 좋겠네요.
 
 ## 레퍼런스
 
