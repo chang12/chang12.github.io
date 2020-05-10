@@ -4,7 +4,7 @@ title: "API Gateway 로 Kinesis 를 위한 HTTP Proxy 만들기"
 tags: []
 ---
 
-[AppsFlyer](https://www.appsflyer.com/) 라는 SaaS 서비스의 데이터를 받아와서 처리하고 싶은 니즈가 생겼습니다. AppsFlyer 는 Event 가 발생할 때 마다 사용자가 등록한 HTTP Endpoint 로 데이터를 쏴주는 [Push API](https://support.appsflyer.com/hc/en-us/articles/207034356-Push-API-V2-0-real-time-attribution-event-reporting) 라는 기능을 제공합니다. 이를 사용해서 HTTP Endpoint 로 데이터를 받고, 후속 처리를 위해 Kinesis Data Stream 에 넣으면 되겠습니다. API Gateway 로 HTTP Endpoint 및 Kinesis 연동이 가능하여 관련 내용을 정리해봤습니다. 
+[AppsFlyer](https://www.appsflyer.com/) 라는 SaaS 서비스의 데이터를 받아와서 처리하고 싶은 니즈가 생겼습니다. AppsFlyer 는 Event 가 발생할 때 마다 사용자가 등록한 HTTP Endpoint 로 데이터를 쏴주는 [Push API](https://support.appsflyer.com/hc/en-us/articles/207034356-Push-API-V2-0-real-time-attribution-event-reporting) 라는 기능을 제공합니다. 이를 사용해서 HTTP Endpoint 로 데이터를 받고, 후속 처리를 위해 Kinesis Data Stream 에 넣으면 되겠습니다. API Gateway 로 HTTP Endpoint 를 만들고 Kinesis 에 연동할 수 있어 관련 내용을 정리해봤습니다. 
 
 ## API 생성
 
@@ -102,5 +102,5 @@ ewogICJhcHBfaWQiOiAiY29tLnNva29sb2ZmMDYuc2RrdGVzdCIsCiAgImV2ZW50X25hbWUiOiAiYWZf
 ## 레퍼런스
 
 - [Tutorial: Create a REST API as an Amazon Kinesis proxy in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/integrating-api-with-aws-services-kinesis.html)
-- [Appsflyer : Push API V2.0 real-time attribution event reporting 문서의 Message structure and unique fields](https://support.appsflyer.com/hc/en-us/articles/207034356-Push-API-V2-0-real-time-attribution-event-reporting#push-api-20-message-structure-and-unique-fields)
+- [Appsflyer : Message structure and unique fields](https://support.appsflyer.com/hc/en-us/articles/207034356-Push-API-V2-0-real-time-attribution-event-reporting#push-api-20-message-structure-and-unique-fields)
 - [API Gateway mapping template and access logging variable reference](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html)
