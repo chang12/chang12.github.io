@@ -164,7 +164,7 @@ data stream 은 1개 이상의 shard 로 이뤄지는데, 적절히 랜덤한 pa
 
 ## Integration Response 설정
 
-Kinesis PutRecord 의 응답이 200 일때 Method Response 로 넘기도록 Integration Response 를 설정합니다. 최종적으로 Appsflyer 쪽에는 200 code 만 지켜주면 되고 response body 는 신경 쓸 필요 없으므로 빈 응답을 내려주도록 `--response-templates` argument 를 줍니다.
+Kinesis PutRecord 의 응답이 200 일때 Method Response 로 넘기도록 Integration Response 를 설정합니다. Appsflyer 쪽에는 200 code 만 지켜주면 되고 response body 는 신경 쓸 필요 없으므로 빈 응답을 내려주도록 `--response-templates` argument 를 줍니다.
 
 ```
 aws apigateway put-integration-response \
@@ -179,7 +179,7 @@ aws apigateway put-integration-response \
 
 ## Method Response 설정
 
-최종적으로 클라이언트 쪽에 내려줄 method response 를 설정합니다. 앞서 얘기한 것 처럼 Appsflyer 쪽에는 200 code 만 지켜주면 되고 response body 는 필요 없으니 **Empty** model 을 사용하도록 `--response-models` argument 를 줍니다.
+클라이언트 쪽에 내려줄 method response 를 설정합니다. 앞서 얘기한 것 처럼 Appsflyer 쪽에는 200 code 만 지켜주면 되고 response body 는 필요 없으니 **Empty** model 을 사용하도록 `--response-models` argument 를 줍니다.
 
 ```
 aws apigateway put-method-response \
@@ -191,6 +191,10 @@ aws apigateway put-method-response \
         "application/json": "Empty"
     '}
 ```
+
+정리해보면 `/` resource 가 요청을 처리해서 응답을 내려주는 건 아래 diagram 처럼 됩니다.
+
+![2020-05-10-api-gateway-diagram.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2020-05-10-api-gateway-diagram.png)
 
 ## Deploy
 
