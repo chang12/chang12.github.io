@@ -146,7 +146,7 @@ Appsflyer 의 Push API 는 HTTP Request Body 에 Event 데이터를 JSON 으로 
 
 이때 Kinesis 는 Data 가 base64 encoded 되어있음을 가정하므로 변환이 필요합니다. API Gateway 는 [Velocity Template Language (VTL)](https://velocity.apache.org/engine/1.7/vtl-reference.html) 를 활용한 변환을 지원합니다. [API Gateway mapping template and access logging variable reference](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html) 문서에서 어떤 것들이 가능한지 확인할 수 있습니다. 마침 `$util` 에 `base64Encode` 가 있으니 그걸 쓰면 되겠습니다.
 
-### ParttionKey
+### PartitionKey
 
 data stream 은 1개 이상의 shard 로 이뤄지는데, 적절히 랜덤한 partition key 를 사용하면 put 로드가 shard 에 골고루 분산되어 좋습니다.
 
