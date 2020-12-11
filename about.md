@@ -17,4 +17,5 @@ permalink: /about/
 - [[풀버전] ♬ 싫다고 말해(Nightmare Ver.) - (여자)아이들 @3차 경연 컴백전쟁 : 퀸덤 8화](https://www.youtube.com/watch?v=QTjZJzYWzEU)
 - [미드나잇 인 서울](https://limyoungjoo.com/post/188895802826/%EB%AF%B8%EB%93%9C%EB%82%98%EC%9E%87-%EC%9D%B8-%EC%84%9C%EC%9A%B8)
 - [영화 소셜 네트워크](https://www.netflix.com/title/70132721)
+- [SMTM9 [8회] '타올랐고 우리 둘이' 뿌리 (Feat. JUSTHIS) - 쿤디판다 @본선 EP.8 201204](https://www.youtube.com/watch?v=UV5JOVcclIg)
 
