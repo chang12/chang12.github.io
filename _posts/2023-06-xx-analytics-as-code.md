@@ -36,3 +36,26 @@ sql 을 전부 사람이 작성하는 것, 이 문제라고 생각 했다. 아�
 이에 대한 자세한 내용을 팀 동료가 회사 블로그 글로 적어주었었다.
 
 [Metric을 체계적으로 관리하기: Metrics Store](https://blog.mathpresso.com/metric-%EC%9D%84-%EC%B2%B4%EA%B3%84%EC%A0%81%EC%9C%BC%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0-metrics-store-ccc4dc1d6768)
+
+# metric hierarchy
+
+그 다음으로 고민했던 것은, 방금 언급한 [Metric을 체계적으로 관리하기: Metrics Store](https://blog.mathpresso.com/metric-%EC%9D%84-%EC%B2%B4%EA%B3%84%EC%A0%81%EC%9C%BC%EB%A1%9C-%EA%B4%80%EB%A6%AC%ED%95%98%EA%B8%B0-metrics-store-ccc4dc1d6768) 글의 마지막 문단에서 얘기 된 것 처럼, metric hierarchy 였다.
+
+> metrics store를 통해서, metric을 체계적으로 관리하고, 이전보다 정확하고 빠른 집계가 가능해졌습니다.
+> 
+> 이제는 metrics store를 전사적으로 활발히 사용할 수 있는 방법, 특히 metrics store를 통해서 metric hierarchy를 만들어내는 것에 대해 고민하고 있습니다. QANDA의 각 business model 별로 가장 집중해야 하는 하나의 metric을 정의하고, 그로부터 파생되는 metric들을 tree 형태로 만들어내기를 기대하고 있습니다. 이를 통해 “어떤 metric에 집중해야 하는지”를 명확히 하는 것을 목표로 합니다.
+
+metric 들이, 모두 동등하지 않고, parent/child 관계를 통해 hierarchy 를 이룬다는 생각이다.
+
+- 이 metric 을 증가/감소 시키려는 시도 들이, 좀 더 궁극적으로, 무엇을 위함이지? (= metric 의 **parents** 에 대한 탐색)
+- metric 이 증가/감소 했네. 그 원인을 좀 더 깊게 이해하고 싶은데. 무엇을 더 보면 좋을까? (= metric 의 **children** 에 대한 탐색)
+
+를 구성원들이 적절히 잘 사고하면 좋을 것이다. 조직의 성공을 위해 각자가 무엇을 하면 좋을지? 그렇게 무언가를 했을 때 이를 어떻게 measure 하면 좋을지? 그렇게 measure 한 결과에 기반하여 무엇을 이어나가면 좋을지? 등을 고민하고 결정하는 데에 적절한 도움이 될 수 있기 때문이다. data literacy 라고들 부르는 능력? 의 일환이라고 할 수 있겠다. 이러한 얘기들이, 각자의 머릿 속에 파편화 되는 것이 아니라, 조직 공동의 knowledge 로서 누적 되기를 원했다. 
+
+앞서 metrics store 를 구성함으로써, metric 들이 yaml file 로 선언되어 (as-code 로) 관리되고 있으므로, 간단하게 해결할 수 있다.
+
+- metric 에 대한 yaml 에 `parent_metrics` 라는 field 를 하나 추가하여, parent metric 들의 name 을 적고,
+- 이를 통해 metric 들을 parent/child 관계의 tree 자료구조로 만들고,
+- 이를 적절한 도구로 (e.g. [markmap](https://markmap.js.org/)) render 하여 hierarchy 를 시각적으로 보여줄 수 있다.
+
+![2023-06-13-metric-hierarchy.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2023-06-13-metric-hierarchy.png)
