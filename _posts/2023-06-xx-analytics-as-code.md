@@ -26,7 +26,7 @@ airbnb 에서도 과거에 그러한 고통을 겪었다고.
 > 
 > [How Airbnb Achieved Metric Consistency at Scale (Part-I: Introducing Minerva — Airbnb’s Metric Platform)](https://medium.com/airbnb-engineering/how-airbnb-achieved-metric-consistency-at-scale-f23cc53dea70#:~:text=For%20data%20consumption,decision%20makers%20degraded.)
 
-sql 을 전부 사람이 작성하는 것, 이 문제라고 생각 했다. 아주 기본적인 것이라 할 수 있는 [앱 방문 유저 수] 마저도, 사람에게 sql 을 전부 작성하라고 하면 -> 작성하는 사람마다 sql 이 제각각 다 다르다. 들여쓰기를 어떻게 할 것인지? 같은 단순 convention 수준의 작은 차이 부터, 집계되는 값을 달라지게 만드는 수준의 큰 차이 (e.g. 집계 기간 내에 유저의 attribute 가 바뀌었을 때 -> 그럼에도 1명으로 셀 것인지 or attribute 값마다 1명 씩으로 셀 것인지.) 까지.
+sql 을 전부 사람이 작성하는 것, 이 문제라고 생각 했다. 아주 기본적인 것이라 할 수 있는 [앱 방문 유저 수] 마저도, sql 을 전부 사람이 작성하면 -> 작성하는 사람마다 sql 이 다 다르다. 들여쓰기를 어떻게 할 것인지? 같은 단순 convention 수준의 작은 차이 부터, 집계되는 값을 달라지게 만드는 수준의 큰 차이 (e.g. 집계 기간 내에 유저의 attribute 가 바뀌었을 때 -> 그럼에도 1명으로 셀 것인지 or attribute 값마다 1명 씩으로 셀 것인지.) 까지.
 
 그래서 선언과 구현을 분리 했다.
 
@@ -50,11 +50,11 @@ metric 들이, 동등하지 않고, parent/child 관계를 통해 hierarchy 를 
 - 이 metric 을 증가/감소 시키려는 시도 들이, 좀 더 궁극적으로, 무엇을 위함이지? (= metric 의 **parents** 에 대한 탐색)
 - metric 이 증가/감소 했네. 그 원인을 좀 더 깊게 이해하고 싶은데. 무엇을 더 보면 좋을까? (= metric 의 **children** 에 대한 탐색)
 
-를 구성원들이 적절히 잘 사고하면 좋을 것이다. 조직의 성공을 위해 각자가 무엇을 하면 좋을지? 그렇게 무언가를 했을 때 이를 어떻게 measure 하면 좋을지? 그렇게 measure 한 결과에 기반하여 무엇을 이어나가면 좋을지? 등을 고민하고 결정하는 데에 적절한 도움이 될 수 있기 때문이다. data literacy 라고들 부르는 능력? 의 일환이라고 할 수 있겠다. 이러한 얘기들이, 각자의 머릿 속에 파편화 되는 것이 아니라, 조직 공동의 knowledge 로서 누적 되기를 원했다. 
+를 구성원들이 적절히 잘 사고하면 좋을 것이다. 조직의 성공을 위해 각자가 무엇을 하면 좋을지? 그렇게 무언가를 했을 때 이를 어떻게 measure 하면 좋을지? 그렇게 measure 한 결과에 기반하여 무엇을 이어나가면 좋을지? 등을 고민하고 결정하는 데에 적절한 도움이 될 수 있기 때문이다. 흔히 data literacy 라고 부르는 능력? 의 일환이라고 할 수 있겠다. 이러한 얘기들이, 각자의 머릿 속에 파편화 되는 것이 아니라, 조직 공동의 knowledge 로서 누적 되기를 원했다. 
 
-앞서 metrics store 를 구성함으로써, metric 들이 yaml file 로 선언되어 (as-code 로) 관리되고 있으므로, 간단하게 해결할 수 있다.
+앞서 metrics store 를 구성함으로써, metric 들이 yaml file 로 선언되어 관리되고 있으므로, 간단하게 해결할 수 있다.
 
-- metric 에 대한 yaml 에 `parent_metrics` 라는 field 를 하나 추가하여, parent metric 들의 name 을 적고,
+- metric 에 대한 yaml 에 `parent_metrics` 라는 field 를 추가하여, parent metric 들의 name 을 적고,
 - 이를 통해 metric 들을 parent/child 관계의 tree 자료구조로 만들고,
 - 이를 적절한 도구로 (e.g. [markmap](https://markmap.js.org/)) render 하여 hierarchy 를 시각적으로 보여줄 수 있다.
 
@@ -64,9 +64,26 @@ metric 들이, 동등하지 않고, parent/child 관계를 통해 hierarchy 를 
 
 이어서 고민 하기 시작한, 아직 미완의 주제는, metric 값을 visualize 하는 것 = chart 에 대한 얘기 이다. 일반적인 business intelligence 전반에 대한 것이 아니고, [metric 값을 chart 로 그리는 것] 에 대한.
 
-- chart 의 가로 축은 날짜 이고, 세로 축은 metric 값이다.
 - metric 목록에서 metric 을 고른다.
 - 조회 하고자 하는 기간을 지정 한다.
-- metric 선언의 내용에 따라, metric 값을 적절한 format 으로 적는다. e.g. [구독 유저 수] 는 3-digits 마다 `,` 로 구분하여 `12,345` 처럼 적는다. [결제 금액] 은 KRW 기준이고 currency symbol 을 prefix 로 붙이고 3-digits 마다 `,` 로 구분하여 `₩12,345,678` 처럼 적는다. [구독 지속률] 은 유효 숫자 3자리로 끊고 뒤에 % 를 붙여서 `12.3%` 처럼 적는다.
-- metric 선언 에는 dimension 들에 대한 내용이 포함 되어 있다. 그 내용에 따라, 원하는 dimension 에 대한 filter 조건을 가할 수 있는 적절한 장치가 자동으로 갖춰진다. e.g. [구독 유저 수] metric 에 [국가] dimension 이 존재 한다. [국가] dimension 은 categorical 하다. [국가] dimension 이 가질 수 있는 값의 목록이 적절히 선언 되어 있다. 그래서 그 목록 중 원하는 값들을 선택할 수 있는 multi-select dropdown 형태의 무언가가 갖춰진다.
-- default 는 line chart 이다. breakdown 하지 않으면 series 1개 이고, breakdown 하면 series 가 여러 개이다. breakdown 했을 때 일부 metric 들은 stacked column chart 로도 조회 가능 하다. e.g. [구독 유저 수] metric 을 [국가] dimension 으로 breakdown 했을 때는 stacked column chart 로도 조회 할 수 있다. [구독 지속률] metric 을 [국가] dimension 으로 breakdown 했을 때는 stacked column chart 로 조회 할 수 없고 line chart 로만 조회 할 수 있다.
+- chart 의 가로 축은 날짜 이고, 세로 축은 metric 값이다.
+- measure 의 의미에 따라, metric 값을 적절한 format 으로 적는다. 
+    - e.g. [구독 유저 수] 는 자연수 이다. 3-digits 마다 `,` 로 구분하여 `12,345` 처럼 적는다. 
+    - e.g. [결제 금액] 은 KRW 기준이고 currency symbol 을 prefix 로 붙이고 3-digits 마다 `,` 로 구분하여 `₩12,345,678` 처럼 적는다.
+    - e.g. [구독 지속률] 은 % 이다. 유효 숫자 3자리로 끊고 뒤에 % 를 붙여서 `12.3%` 처럼 적는다.
+- metric 선언에 dimension 에 대한 내용이 포함 되어 있다. 그 내용에 따라, 원하는 dimension 에 대한 조건을 가할 수 있는 적절한 장치가 갖춰진다. 
+    - e.g. [구독 유저 수] metric 에 dimension 으로 [국가] 가 있다. [국가] dimension 은 categorical 이다. [국가] dimension 이 가질 수 있는 값의 목록이 적절히 선언 되어 있다. 그래서 그 목록 중 원하는 값들을 선택할 수 있는 multi-select dropdown 형태의 무언가가 갖춰진다.
+- 기본적으로 line chart 로 보여준다. breakdown 하지 않으면 series 1개 이고, breakdown 하면 여러 series 로 나눠진다. 이때 metric 이 additive 한 경우에는 breakdown 했을 때 stacked column chart 로도 조회 할 수 있다.
+    - e.g. [구독 유저 수] metric 은 additive 하다. 전체 [구독 유저 수] = [국가] 별 [구독 유저 수] 의 sum 과 일치 한다. 그래서 [국가] dimension 으로 breakdown 했을 때 stacked column chart 로도 조회 할 수 있다. 
+    - e.g. [구독 지속률] metric 은 additive 하지 않다. 전체 [구독 지속률] = [국가] 별 [구독 지속률] 의 sum 과 일치하지 않는다. 그래서 [국가] dimension 으로 breakdown 했을 때 stacked column chart 로 조회 할 수 없고 line chart 로만 조회 할 수 있다.
+
+이러한 모습을, 사용하던 business intelligence 도구 ([holistics](https://www.holistics.io/) 를 과거 version 인 2.7 로 사용 중) 에서 구현 하려고 했으나, 일부 안되는 것들이 있었다.
+
+- number / KRW / % 등의 값 format 은, chart 를 조회 할 때 바꿔 볼 수 없다. chart 의 설정을 아예 바꾸어야 한다.
+- line chart / stacked column chart 같은 visualization 방식도 마찬가지 이다. chart 를 조회 할 때 바꿔 볼 수 없다. chart 의 설정을 아예 바꾸어야 한다.
+
+그래서 data engineer 동료 분이 직접 만들었다.
+
+- metrics store 를 감싸는 간단한 api 를 [fastapi](https://fastapi.tiangolo.com/lo/) 로 개발하여 [cloud run](https://cloud.google.com/run) 으로 deploy 했다. 현재 우리의 metrics store 를 통한 집계 = metric 에 1:1 대응하는 bigquery table function 호출이다. 그 호출에 필요한 argument 값들을 api request 로 받고, bigquery query job 실행 결과를 적절한 schema 로 가공하여 api response 로 return 한다.
+- 내부 구성원들의 metrics store 사용을 위한 web 에 metric 마다 상세 페이지가 있다. 거기서 chart 를 조회 할 수 있게 했다. 그 과정에서 위의 api 가 사용 된다. visualize 에는 [highcharts](https://www.highcharts.com/) 를 사용 했다.
+
