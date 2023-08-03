@@ -102,4 +102,34 @@ metrics store 덕분에, metric 들이 yaml file 로 관리되고 있어서, 간
 - 같은 값의 format (number, krw, percentage 등) 을 chart 를 [조회 할 때] 바꿔 볼 수 없다. chart 의 설정을 아예 바꾸어야 한다.
 - visualization 방식 (line, stacked column 등) 도  마찬가지. chart 를 [조회 할 때] 바꿔 볼 수 없다. chart 의 설정을 아예 바꾸어야 한다.
 
-그래서 data engineer 동료 분이 직접 만들었다.
+그래서 data engineer 동료 분이 직접 만들었다. 회사 구성원들이 이를 통해 metric 값을 조회하고 있다.
+
+사실 dashboard-as-code 에 대해 처음 생각했던 것은, [실험 (a/b test) 에 대한 dashboard 를 자동으로 생성하려면?] 을 고민할 때 였다. [실험 의사결정 가이드 자동화 : QXP Tracker](https://blog.mathpresso.com/%EC%8B%A4%ED%97%98-tracking-b3e5ba7b3004) 글과도 관련된 내용이다.
+
+- [실험] 과 [실험 그룹 할당] 에 대한 공통의 mart table 들을 만들었고,
+- [어느 실험에서, 유저가 어느 실험 그룹으로 할당 되었는지] 도 metrics store 에서 하나의 dimension 으로 간주하도록 통합하였다. 
+
+그래서 아래와 같은 일관된 (bigquery) sql 로 실험 결과를 집계할 수 있다.
+
+```sql
+select
+  date_kst,
+  breakdown1 as experiment_group,
+  value,
+from
+  metric.<metric name>(
+    _date_range_start => '<실험 시작 yyyy-MM-dd>',
+    _date_range_end => '<실험 종료 yyyy-MM-dd>',
+    _filter => '{"experiment_id": "<실험 id>"}',
+    -- 실험 시작 날짜 부터 누적으로 값을 집계하기 위하여.
+    _window => '<실험 시작 yyyy-MM-dd>',
+    _breakdown => 'experiment_group'
+  )
+order by
+  date_kst
+  , experiment_group
+```
+
+그러니 이를 적절히 잘 감싸서 -> 실험 dashboard 를 자동으로 만들 수 있다. 
+
+처음 시도 때는 superset 을 사용하려고 했었다. 하지만 superset 자체적으로 dimension/measure 에 기반한 semantic layer? 가 있고, 그걸 사용하는 것 위주로 practice 가 만들어져 있어서, sql 수준에서 원하는 걸 하는게 잘 안되었다. 그래서 포기 했었다. 이제는 superset 없이 직접 html 을 다루는 식으로 최초 구현하며 기반을 만들었으니, 이어서 쉽게 할 수 있을 것이다.
