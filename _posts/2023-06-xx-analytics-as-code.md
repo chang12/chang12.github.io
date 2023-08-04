@@ -132,4 +132,4 @@ order by
 
 그러니 이를 적절히 잘 감싸서 -> 실험 dashboard 를 자동으로 만들 수 있다. 
 
-처음 시도 때는 superset 을 사용하려고 했었다. 하지만 superset 자체적으로 dimension/measure 에 기반한 semantic layer? 가 있고, 그걸 사용하는 것 위주로 practice 가 만들어져 있어서, sql 수준에서 원하는 걸 하는게 잘 안되었다. 그래서 포기 했었다. 이제는 superset 없이 직접 html 을 다루는 식으로 최초 구현하며 기반을 만들었으니, 이어서 쉽게 할 수 있을 것이다.
+처음 시도 때는 superset 을 사용하려고 했었다. 하지만 superset 자체적으로 dimension/measure 에 기반한 semantic layer? 가 있고, 그걸 사용하는 것 위주로 practice 가 만들어져 있어서, sql 수준에서 원하는 걸 하는게 잘 안되었다. 그래서 포기 했었다. 이제는 superset 없이 직접 개발하기 위한 기반을 갖췄고, 최초 구현 사례도 있으니, 쉽게 할 수 있을 것이다.
