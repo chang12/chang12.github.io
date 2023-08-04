@@ -136,4 +136,13 @@ order by
 
 # 다음으로는?
 
-funnel 도 data analytics 에서 많이 다루는 주제이다. [우리 팀이 다루는 funnel 들이 정확히 어떤 것들이 있지?], [이 funnel 은 정확히 어떤 step 들로 구성되어 있지?] 같은 질문들에 대한 답도 조직 공통의 knowledge = code 로 관리하고 싶다. **funnel-as-code** 라고 할 수 있겠다. 관련하여, 2023 상반기에 [PAP (Product Analytics Playground)](https://playinpap.oopy.io/) 활동에 참여하면서 2편의 글을 작성 했었다.= [첫번째 글](https://playinpap.github.io/funnel-as-code-1/), [두번째 글](https://playinpap.github.io/funnel-as-code-step-wise-conversion-rate-line-chart/). 글을 작성하며 간단한 poc 수준의 code 는 작성하였으나, 실제 회사 code 에 반영하진 못했다.
+## funnel-as-code
+
+funnel 도 data analytics 에서 많이 다루는 주제이다.
+
+- 우리 팀이 다루는 funnel 들이 정확히 어떤 것들이 있지?
+- 이 funnel 은 정확히 어떤 step 들로 구성되어 있지? 
+
+같은 질문들에 대한 답도, 조직 공통의 knowledge = code 로 관리하고 싶다. **funnel-as-code** 라고 할 수 있겠다. 
+
+관련하여, 2023 상반기에 [PAP (Product Analytics Playground)](https://playinpap.oopy.io/) 활동에 참여하면서 2편의 글을 작성 했었다.= [첫번째 글](https://playinpap.github.io/funnel-as-code-1/), [두번째 글](https://playinpap.github.io/funnel-as-code-step-wise-conversion-rate-line-chart/). 글을 작성하며 간단한 poc 수준의 code 는 작성하였으나, 실제 회사 code 에 반영하진 못했다.
