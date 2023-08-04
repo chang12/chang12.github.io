@@ -133,3 +133,7 @@ order by
 그러니 이를 적절히 잘 감싸서 -> 실험 dashboard 를 자동으로 만들 수 있다. 
 
 처음 시도 때는 superset 을 사용하려고 했었다. 하지만 superset 자체적으로 dimension/measure 에 기반한 semantic layer? 가 있고, 그걸 사용하는 것 위주로 practice 가 만들어져 있어서, sql 수준에서 원하는 걸 하는게 잘 안되었다. 그래서 포기 했었다. 이제는 superset 없이 직접 개발하기 위한 기반을 갖췄고, 최초 구현 사례도 있으니, 쉽게 할 수 있을 것이다.
+
+# 다음으로는?
+
+funnel 도 data analytics 에서 많이 다루는 주제이다. [우리 팀이 다루는 funnel 들이 정확히 어떤 것들이 있지?], [이 funnel 은 정확히 어떤 step 들로 구성되어 있지?] 같은 질문들에 대한 답도 조직 공통의 knowledge = code 로 관리하고 싶다. **funnel-as-code** 라고 할 수 있겠다. 관련하여, 2023 상반기에 [PAP (Product Analytics Playground)](https://playinpap.oopy.io/) 활동에 참여하면서 2편의 글을 작성 했었다.= [첫번째 글](https://playinpap.github.io/funnel-as-code-1/), [두번째 글](https://playinpap.github.io/funnel-as-code-step-wise-conversion-rate-line-chart/). 글을 작성하며 간단한 poc 수준의 code 는 작성하였으나, 실제 회사 code 에 반영하진 못했다.
