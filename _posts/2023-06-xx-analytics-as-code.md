@@ -1,3 +1,9 @@
+---
+layout: post
+title: "analytics-as-code 에 대한 주절주절"
+tags: []
+---
+
 (data) analytics 가 체계적으로 이뤄지는 모습을 지향한다.
 
 무언가가 체계적으로 이뤄진다는 것은, 
@@ -151,3 +157,9 @@ funnel 도 data analytics 에서 많이 다루는 주제이다.
 2.  [funnel-as-code : step-wise conversion rate 를 보여주는 line chart](https://playinpap.github.io/funnel-as-code-step-wise-conversion-rate-line-chart/)
 
 글을 작성하며 간단한 poc 수준의 code 는 작성하였으나, 실제 회사 code 에 반영하진 못했다.
+
+funnel 에 이어서 -> screen flow, retention, 등으로 생각이 이어지는데... 한편으로는 amplitude, mixpanel 같은 product analytics 도구의 [열화판] 을 만들려고 하는건가? 싶어서 뜨끔한다. 또 다른 한편으로는, 자신들에게 딱 맞는 적절한 인하우스 도구를 만들어서 회사의 성장을 도모한 [duolingo](https://blog.duolingo.com/duolingos-secret-weapon-our-beautiful-and-powerful-analytics-tools/) 와 [토스](https://www.youtube.com/watch?v=8ZhnUgylQgo&t=887s) 의 사례를 떠올리며 -> 자연스러운 수순인가 싶기도.
+
+metrics store -> metric hierarchy -> 에 이어서는 **metric review** 에 대해 생각하고 있다. 인상깊게 읽었던 [Working Backwards](https://www.amazon.com/Working-Backwards-Insights-Stories-Secrets/dp/1250267595) 책에서 얘기하는 WBR (Weekly Business Review) 를 상기하면서. DMAIC (Define -> Measure -> Analyze -> Improve -> Control) 에서 Improve 와 Control 이 제대로 원활하게 이뤄지는 모습을 직접 경험해본 적 없다. 이를 위해서는 그전에 Analyze 를 정말 잘해야 한다는 것을 절실히 느끼고 있다. metrics store 는 Measure 를 체계적으로 하기 위함이고, 그 기반 위에서 Analyze 를 제대로 하려면 -> metric hierarchy 와 metric review 를 계속해서 번갈아 반복하며 이해도를 높혀야 하지 않을까.
+
+회사에서 notion 을 쓰고 있다. 회사는 3개의 business group (+ 1개의 foundation group) 들로 구성되어 있다. 공통은 아니고 business group 마다 제각각이긴 하지만, 아무튼 business group 들에서 진행하는 project 들은 모두 notion database 로 관리되고 있다. project 에 누가 참여하는지? property 정도는 공통으로 존재하고. project 마다 목표 (objective? goal?) 가 있을 것이다. 그리고 대부분은 정량적으로 measurable 해야 = 어떤 metric 을 증가/감소 시키기 위함인지 명확해야 할 것이다. 그래야 사후에 actual impact 를 measure 할 수 있고, 이를 사전의 estimation 과 비교하며 학습하여, 더 훌륭한 조직이 될 수 있으니. 그렇게 metrics store, metric hierarchy, metric review 같은 metric 얘기들이 -> project, people 과도 참조 관계로 한데 어우러진다. 이정도 까지 이르게 된다면 -> **company-as-code** 라고 할 수 있지 않을까.
