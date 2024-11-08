@@ -12,3 +12,5 @@
 6. 정상적으로 요청이 처리 되었는데, 생성된 결과물에 하자가 있는 경우 = classifier 의 값이 true 인데 실제로는 false 인 경우의 비율 = fp / (tp + fp) = 1 - tp / (tp + fp) = 1 - `precision` 이다.
 7. 그러니 고객사의 니즈는 = prevalence 는 낮아도 괜찮지만 & precision 은 거의 1 에 가까워야 한다, 라고 표현할 수 있다는 것을 새롭게 알게 되었다.
 8. 그러니 내가 해야할 일은 precision 이 거의 1 에 가까운 binary classifier 를 만드는 것이다.
+9. precision 을 높이기 위해서는, 일단 precision 을 측정할 수 있어야 한다.
+10. 그러려면 “실제 값” 을 알아야 하니, 생성 결과 n개를 domain 전문가에게 전달하여 분류를 요청했고, 이를 통해 “실제 값” 을 얻었다.
