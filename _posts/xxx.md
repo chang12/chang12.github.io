@@ -14,3 +14,18 @@
 8. 그러니 내가 해야할 일은 precision 이 거의 1 에 가까운 binary classifier 를 만드는 것이다.
 9. precision 을 높이기 위해서는, 일단 precision 을 측정할 수 있어야 한다.
 10. 그러려면 “실제 값” 을 알아야 하니, 생성 결과 n개를 domain 전문가에게 전달하여 분류를 요청했고, 이를 통해 “실제 값” 을 얻었다.
+11. binary classifier 는 llm api 를 사용해서 만들었다. prompt engineering 인 것이다. input 을 포함한 적절한 instruction 을 적고, boolean field 로 구성된 json 을 output 으로 달라고 하는 것이다.
+```python
+input = ...
+message = create_message(input)
+llm_response = classify_using_llm(message)
+is_xxx: bool = llm_response["is_xxx"]
+```
+12. 10 의 input 들을 llm 에 기반한 binary classifier 에 넘겨서 boolean 값을 얻는다.
+13. 12 의 boolean 값을 < - > 10 에서 확보한 ground truth 과 비교 하여, false positive 인 것들을 나열한다.
+14. 그 중 하나를 골라서, `create_message` 를 호출하여 llm 에게 넘길 prompt 를 얻는다.
+15. (openai 의 llm 을 사용한다면) chatgpt 에 copy & paste 하여 false positive 가 되는 것을 재현한다.
+16. 이를 true negative 로 바꿀 idea 를 고민하며 true negative 가 될 때 까지 prompt 를 수정한다.
+17. 수정한 prompt 로 다시 classifier 를 돌렸을 때, precision 이 높아졌다면 수정한 prompt 를 취하고, 아니라면 기존 prompt 를 유지한다. 
+18. 원하는 수준의 precision 을 달성할 때 까지 12 ~ 17 을 반복한다. 
+19. 이렇게 하니까, 리듬감 있게 집중할 수 있었다.
