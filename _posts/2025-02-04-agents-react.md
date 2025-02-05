@@ -95,6 +95,6 @@ for s in agent.stream(input_, stream_mode="values"):
 
 ![]({{ site.baseurl }}/images/agent-output.png)
 
-**절차적 -> 선언적 으로의 shift 로 보인다.** 목표를 달성하기 위해 llm 을 여러번 호출하고, 그 일련의 (sequential or parallel) 호출 들을 결합 해야하는 경우가 빈번하다. 그 결합 logic 을 직접 rule-based 의 code 로 작성하는 대신, 단위 작업들만 tool 로 선언하고, 결합은 orchestrator = reasoning 에 특화된 llm 기반 module 에게 맡기는 것.
+**절차적 -> 선언적 으로의 shift 로 보인다.** 목표를 달성하기 위해, llm 을 여러번 호출하고, 그 일련의 호출 들을 결합 해야하는 경우가 빈번하다. 그 결합을 직접 rule-based 의 code 로 작성하는 대신, 단위 작업들만 tool 로 선언하고, 결합은 orchestrator 에게 맡기는 것.
 
-그런데 오늘날에는 o3, deep research 등 llm provider 들 자체적으로 강력한 reasoning 을 제공한다. 그렇게 [o3-mini 에도 function calling 이 제공되는 현 시점에](https://openai.com/index/openai-o3-mini/), 직접 `create_react_agent` 를 호출 하거나 langgraph 에서 graph 를 선언 하고 build 하게 될 일이 있을까?
+그런데 오늘 날에는 llm provider 들이 자체적으로 o3, deep research 같은 강력한 reasoning 을 제공 한다. 그렇게 [o3-mini 에도 function calling 이 제공되는 현 시점에](https://openai.com/index/openai-o3-mini/), 직접 `create_react_agent` 를 호출 하거나 langgraph 에서 graph 를 선언 하고 build 하게 될 일이 있을까?
