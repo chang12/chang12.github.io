@@ -43,7 +43,7 @@ Reason 과 Action 을 반복한다고 하여 ReAct 인가보다.
 >         1. This thought / action / action input / observation could repeat N-times as needed
 >     6. `Final answer`: The model’s final answer to provide to the original user query
 
-![]({{ site.baseurl }}/images/react-diagram.png)
+![](../images/react-diagram.png)
 
 example code 를 보면 langgraph 에서 `create_react_agent` 를 제공하고, langchain 에서 tool 들을 제공한다.
 
@@ -93,7 +93,7 @@ for s in agent.stream(input_, stream_mode="values"):
 
 ```
 
-![]({{ site.baseurl }}/images/agent-output.png)
+![](../images/agent-output.png)
 
 **절차적 -> 선언적 으로의 shift 로 보인다.** 목표를 달성하기 위해, llm 을 여러번 호출하고, 그 일련의 호출 들을 결합 해야하는 경우가 빈번하다. 그 결합을 직접 rule-based 의 code 로 작성하는 대신, 단위 작업들만 tool 로 선언하고, 결합은 orchestrator 에게 맡기는 것.
 
