@@ -4,18 +4,18 @@ title: ""
 tags: []
 ---
 
-bigquery 에서 sql 작성할 때, 여러 row 가 있는 상황에서 최초 or 마지막 값을 취하고 싶을 때가 있다. e.g. 유저를 앱으로 유입 시킨 channel 이 여러개 있는데, 그 중에서 최초로 유입 시킨 channel 에 attribution 을 주고 싶다던가.
+bigquery 에서 sql 작성할 때, group by 로 어떤 expression 의 최초 or 마지막 값을 취하고 싶을 때가 있다. e.g. wau 의 마지막 접속 device 를 얻고 싶다던지.
 
 그런 경우에, 처음에는 `row_number` 를 사용했다.
 
 ```sql
 select
   ...
-  channel,
+  device,
 from (
   select
     ...
-    channel,
+    device,
     row_number() over (partition by user_id order by ts) as rn,
   from
     event
@@ -31,7 +31,7 @@ where
 ```sql
 select
   ...
-  channel,
+  device,
 from
   event
 qualify
