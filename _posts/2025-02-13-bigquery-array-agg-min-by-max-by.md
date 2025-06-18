@@ -41,3 +41,30 @@ from
 qualify
   row_number() over (partition by user_id order by ts) = 1
 ```
+
+### array_agg
+
+그러던 중, 2022-03-05 에 bigquery 문서를 읽고, `array_agg` 를 쓰는 practice 에 대해 알게 되었다. 해당 문서에서는 `row_number` 를 쓰는 대신 `array_agg` 를 쓰는 게 best practice 라고 소개한다.
+
+> Use aggregate analytic function to obtain the latest record
+> 
+> **Best practice**: To obtain the latest record, use the `ARRAY_AGG()` aggregate analytic function.
+> 
+> Using the `ARRAY_AGG()` aggregate analytic function instead of using numbering functions, such as `RANK()` or `ROW_NUMBER()`, allows a query to run more efficiently because the `ORDER BY` clause is allowed to drop everything except the top record on each `GROUP BY` clause. For example,
+```sql
+SELECT
+  event.*
+FROM (
+  SELECT id, ARRAY_AGG(
+    t ORDER BY t.created_at DESC LIMIT 1
+  )[OFFSET(0)] event
+  FROM
+    `dataset.table` t
+  GROUP BY
+    id
+)
+```
+
+겸사겸사, `from` 절에 적은 table 을 `select` 절에서 struct 으로 다룰 수 있다는 것도 배웠다.
+
+해당 내용은 원래 bigquery [Optimize query computation](https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 문서에 있었다. 그런데 글을 작성하는 시점에 다시 들어가 보니 내용이 없어졌다. [wayback machine](https://web.archive.org/web/20220501000000*/https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 으로 확인 해보니, [2022-07-03 snapshot](https://web.archive.org/web/20220703045100/https://cloud.google.com/bigquery/docs/best-practices-performance-compute#use_aggregate_analytic_function_to_obtain_the_latest_record) 까지는 있는데, [2022-08-29 snapshot](https://web.archive.org/web/20220829114913/https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 부터 없어졌다.   
