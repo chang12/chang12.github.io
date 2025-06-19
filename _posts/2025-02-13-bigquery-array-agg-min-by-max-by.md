@@ -68,3 +68,5 @@ FROM (
 겸사겸사, `from` 절에 적은 table 을 `select` 절에서 struct 으로 다룰 수 있다는 것도 배웠다.
 
 해당 내용은 원래 bigquery [Optimize query computation](https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 문서에 있었다. 그런데 글을 작성하는 시점에 다시 들어가 보니 내용이 없어졌다. [wayback machine](https://web.archive.org/web/20220501000000*/https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 으로 확인 해보니, [2022-07-03 snapshot](https://web.archive.org/web/20220703045100/https://cloud.google.com/bigquery/docs/best-practices-performance-compute#use_aggregate_analytic_function_to_obtain_the_latest_record) 까지는 있는데, [2022-08-29 snapshot](https://web.archive.org/web/20220829114913/https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 부터 없어졌다.   
+
+없어진 이유가 무엇일까? 하고 [BigQuery release notes](https://cloud.google.com/bigquery/docs/release-notes) 에서 2022-07 ~ 2022-08 의 내용을 확인 해봤으나, 딱히 짐작가는 바가 없다.
