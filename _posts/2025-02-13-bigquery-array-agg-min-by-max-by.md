@@ -70,3 +70,7 @@ FROM (
 해당 내용은 원래 bigquery [Optimize query computation](https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 문서에 있었다. 그런데 글을 작성하는 시점에 다시 들어가 보니 내용이 없어졌다. [wayback machine](https://web.archive.org/web/20220501000000*/https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 으로 확인 해보니, [2022-07-03 snapshot](https://web.archive.org/web/20220703045100/https://cloud.google.com/bigquery/docs/best-practices-performance-compute#use_aggregate_analytic_function_to_obtain_the_latest_record) 까지는 있는데, [2022-08-29 snapshot](https://web.archive.org/web/20220829114913/https://cloud.google.com/bigquery/docs/best-practices-performance-compute) 부터 없어졌다.   
 
 없어진 이유가 무엇일까? 하고 [BigQuery release notes](https://cloud.google.com/bigquery/docs/release-notes) 에서 2022-07 ~ 2022-08 의 내용을 확인 해봤으나, 딱히 짐작가는 바가 없다.
+
+이 문단을 적으면서 문득, 이렇게 유용하게 잘 쓰는 `array_agg` 가 언제부터 있었을까? 궁금해져서 찾아보니, 적어도 2016-12-22 부터 존재한 오래된 function 이었다. [2016-12-22 자 release note](https://cloud.google.com/bigquery/docs/release-notes#December_22_2016) 에 아래 내용이 있다.
+
+> Standard SQL now supports ORDER BY and LIMIT clauses within ARRAY_AGG, ARRAY_CONCAT_AGG, and STRING_AGG.
