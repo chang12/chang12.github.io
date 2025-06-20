@@ -74,3 +74,7 @@ FROM (
 이 문단을 적으면서 문득, 이렇게 유용하게 잘 쓰는 `array_agg` 가 언제부터 있었을까? 궁금해져서 찾아보니, 적어도 2016-12-22 부터 존재한 오래된 function 이었다. [2016-12-22 자 release note](https://cloud.google.com/bigquery/docs/release-notes#December_22_2016) 에 아래 내용이 있다.
 
 > Standard SQL now supports ORDER BY and LIMIT clauses within ARRAY_AGG, ARRAY_CONCAT_AGG, and STRING_AGG.
+
+### min_by, max_by
+
+그렇게 `array_agg` 를 잘 활용하고 있던 중, 2024-07-09 에 `min_by`, `max_by` function 이 있다는 걸 알게 되었다. 
