@@ -77,4 +77,29 @@ FROM (
 
 ### min_by, max_by
 
-그렇게 `array_agg` 를 잘 활용하고 있던 중, 2024-07-09 에 `min_by`, `max_by` function 이 있다는 걸 알게 되었다. 
+그렇게 `array_agg` 를 잘 활용하고 있던 중, 2024-07-09 에 `min_by`, `max_by` function 이 있다는 걸 알게 되었다.
+
+원래 이렇게 하던 걸,
+```sql
+select
+  id,
+
+  array_agg(xxx order by created_at limit 1)[safe_offset(0)] as record,
+from
+  xxx
+group by
+  id
+```
+더 간결하게 이렇게 할 수 있는.
+```sql
+select
+  id,
+
+  min_by(xxx, created_at) as record,
+from
+  xxx
+group by
+  id
+```
+
+[MAX_BY](https://cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max_by), [MIN_BY](https://cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min_by) 문서를 보면 `Synonym for ANY_VALUE(x HAVING MAX/MIN y).` 라고 한다. bigquery release notes 를 보니, [2023-02-06 에](https://cloud.google.com/bigquery/docs/release-notes#February_06_2023) `any_value` function 에 having max/min clause 가 preview 로 추가 되었고, [2023-08-08 에](https://cloud.google.com/bigquery/docs/release-notes#August_08_2023) generally available 되면서, 동시에 `max_by` 와 `min_by` 도 추가 되었다.   
