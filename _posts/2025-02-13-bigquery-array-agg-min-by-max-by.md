@@ -103,3 +103,56 @@ group by
 ```
 
 [MAX_BY](https://cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#max_by), [MIN_BY](https://cloud.google.com/bigquery/docs/reference/standard-sql/aggregate_functions#min_by) 문서를 보면 `Synonym for ANY_VALUE(x HAVING MAX/MIN y).` 라고 한다. bigquery release notes 를 보니, [2023-02-06 에](https://cloud.google.com/bigquery/docs/release-notes#February_06_2023) `any_value` function 에 having max/min clause 가 preview 로 추가 되었고, [2023-08-08 에](https://cloud.google.com/bigquery/docs/release-notes#August_08_2023) generally available 되면서, 동시에 `max_by` 와 `min_by` 도 추가 되었다.   
+
+### min_by, max_by 의 함정
+
+그래서 `min_by`, `max_by` 를 알게된 후로 query 를 작성할 때는 `array_agg` 대신 `min_by`, `max_by` 를 쓰기 시작했다. 그리고 틈날때 마다, `array_agg` 를 쓰던 기존 query 들을 -> `min_by`, `max_by` 를 쓰도록 수정했다.
+
+그러던 중 2025-02-13 에 daily batch 의 특정 query job 의 실행 시간이 어제 대비 급격히 증가하는 것을 관찰했다. 직전 실행 이후 어떤 수정이 있었는지 commit history 를 확인 해보니, `array_agg` 쓰던 부분을 `min_by` 로 바꾼 것 뿐 이었다.
+
+query job 실행 시간이 달라질 만한 수정은 아니라고 생각하여 의아했는데, 확인 해보니, `array_agg` 를 쓸 때와, `min_by` 를 쓸 때, bigquery console 에서 보여주는 **estimated bytes processed** 가 다르다.
+
+e.g.
+
+```sql
+select
+  record.field1
+from (
+  select
+    array_agg(event order by event_at limit 1)[safe_offset(0)] as record,
+  from
+    <some_event_table> as event
+)
+```
+
+`array_agg` 를 쓸 때는 **106.98 GB** 인데,
+
+```sql
+select
+  record.field1
+from (
+  select
+    min_by(event, event_at) as record,
+  from
+    <some_event_table> as event
+)
+```
+
+`min_by` 를 쓸 때는 **1.11 TB** 로 커진다.
+
+```sql
+select
+  record.field1
+from (
+  select
+    any_value(event having min event_at) as record,
+  from
+    <some_event_table> as event
+)
+```
+
+문서에서 `Synonym for ANY_VALUE(x HAVING MAX/MIN y).` 라고 했던 것 처럼, `any_value` 쓸 때도 `min_by` 와 동일하게 **1.11 TB** 로 커진다. 
+
+<some_event_table> 에서 결과적으로 `event_at` 과 `field1` 만 사용하는 데, 
+- `array_agg` 쓰는 query 에서는 그게 인지 되어 `event_at` 과 `field1` 만큼만 estimated bytes processed 로 잡히고, 
+- `min_by` 와 `any_value` 를 쓰는 query 에서는 인지가 안되어 <some_event_table> 전체가 estimated bytes processed 로 잡히는 것이다.
