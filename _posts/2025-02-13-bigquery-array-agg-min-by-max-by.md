@@ -153,6 +153,40 @@ from (
 
 문서에서 `Synonym for ANY_VALUE(x HAVING MAX/MIN y).` 라고 했던 것 처럼, `any_value` 쓸 때도 `min_by` 와 동일하게 **1.11 TB** 로 커진다. 
 
-<some_event_table> 에서 결과적으로 `event_at` 과 `field1` 만 사용하는 데, 
+<some_event_table> 에서 결과적으로 `event_at` 과 `field1` 만 사용하는 데,
 - `array_agg` 쓰는 query 에서는 그게 인지 되어 `event_at` 과 `field1` 만큼만 estimated bytes processed 로 잡히고, 
 - `min_by` 와 `any_value` 를 쓰는 query 에서는 인지가 안되어 <some_event_table> 전체가 estimated bytes processed 로 잡히는 것이다.
+
+### execution details 에 차이가 있다.
+
+`array_agg` 를 쓰는 query 의 execution details 은 아래와 같다. 처음부터 `$1:event_at, $2:field1 FROM event.test` 로 `event_at` 과 `field1` 만 취하고, 이후 step 을 진행하는 것을 볼 수 있다.  
+```
+[S00: Input]
+$1:event_at, $2:field1 FROM event.test
+$30 := SHARD_ARRAY_AGG($2 ORDER BY $1 ASC LIMIT 1)
+$30 TO __stage00_output
+
+[S01: Output]
+$30 FROM __stage00_output
+$10 := safe_array_at_offset($20, 0)
+$20 := ROOT_ARRAY_AGG($30 ORDER BY  ASC LIMIT 1)
+$10 TO __stage01_output
+```
+
+그에 비해 `min_by` 를 쓰는 query 의 execution details 은 아래와 같다. `event_at` 과 `field1` 만 필요하다는 것에 대한 인지 없이, `MAKE_STRUCT($1, $2, $3, $4, $5, 1)` 해버리는 걸 볼 수 있다.
+```
+[S00: Input]
+$1:user_id, $2:created_at, $3:_date, $4:event_at, $5:field1 FROM event.test
+$30 := SHARD_ANY_VALUE_HAVING($40)
+$40 := MAKE_STRUCT($1, $2, $3, $4, $5, 1)
+$30 TO __stage00_output
+
+[S01: Output]
+$30 FROM __stage00_output
+$10 := STRUCT_FIELD_OP(4, $20)
+$20 := ROOT_ANY_VALUE_HAVING($30)
+$10
+TO __stage01_output
+```
+
+더 찾아보니, 이렇게 전체 query 를 파악하여 필요한 column 만 취하여 사용하는 걸 **column pruning** 이라 부른다고. 
