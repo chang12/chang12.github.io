@@ -189,4 +189,8 @@ $10
 TO __stage01_output
 ```
 
-더 찾아보니, 이렇게 전체 query 를 파악하여 필요한 column 만 취하여 사용하는 걸 **column pruning** 이라 부른다고. 
+이렇게, 전체 query 를 파악하여 필요한 column 만 취하여 사용하는 걸 `column pruning` 이라 부른다고.
+
+### 결론
+
+기존에 `array_agg` 쓰던 곳들을, `min_by`/`max_by` 쓰도록 수정하고 싶지만, column pruning 관련 이슈가 해소 될 때 까지는 기다려야 하겠다.
