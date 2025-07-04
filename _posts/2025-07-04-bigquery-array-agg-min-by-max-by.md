@@ -153,9 +153,9 @@ from (
 
 문서에서 `Synonym for ANY_VALUE(x HAVING MAX/MIN y).` 라고 했던 것 처럼, `any_value` 쓸 때도 `min_by` 와 동일하게 **1.11 TB** 로 커진다. 
 
-<some_event_table> 에서 결과적으로 `event_at` 과 `field1` 만 사용하는 데,
+결과적으로 table 에서 `event_at` 과 `field1` 만 사용하는 데,
 - `array_agg` 쓰는 query 에서는 그게 인지 되어 `event_at` 과 `field1` 만큼만 estimated bytes processed 로 잡히고, 
-- `min_by` 와 `any_value` 를 쓰는 query 에서는 인지가 안되어 <some_event_table> 전체가 estimated bytes processed 로 잡히는 것이다.
+- `min_by` 와 `any_value` 를 쓰는 query 에서는 인지가 안되어 table 전체가 estimated bytes processed 로 잡히는 것이다.
 
 ### execution details 에 차이가 있다.
 
