@@ -18,7 +18,7 @@ Cloud Composer 를 써보기 위해 Environment 를 만들 때, Worker nodes 의
 > 
 > When you create a cluster, **the number and type of nodes that you specify becomes the default node pool.** Then, you can add additional custom node pools of different sizes and types to your cluster. All nodes in any given node pool are identical to one another.
 
-![2019-10-06-pic1-workloads-composer-related.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-10-06-pic1-workloads-composer-related.png)
+![2019-10-06-pic1-workloads-composer-related.png](/images/2019-10-06-pic1-workloads-composer-related.png)
 
 Kubernetes Engine Console 의 Clusters 탭에서 Environment 가 띄운 Cluster 를 선택하고, 상단의 ADD NODE POOL 버튼을 클릭하고 설정값을 입력해서 새로운 node pool 을 생성합니다. KubernetesPodOperator 로 실행할 Task 들을 위한 별도의 node pool 입니다.
 
@@ -111,7 +111,7 @@ Starting attempt 1 of
 
 Workloads 탭에서도 DAG 의 Task 를 위해 실행된 Pod 내역을 볼 수 있습니다.
 
-![2019-10-06-pic2-workloads-pods.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-10-06-pic2-workloads-pods.png)
+![2019-10-06-pic2-workloads-pods.png](/images/2019-10-06-pic2-workloads-pods.png)
 
 ## Autoscaling
 

@@ -9,7 +9,7 @@ ML 모델을 서비스로 배포하려면 어떻게 하는게 좋을지 궁금�
 [Developer Guide 의 Get Started](https://docs.aws.amazon.com/sagemaker/latest/dg/gs.html) 를 읽으며 따라갔습니다. 퍼블릭 클라우드에서 AI 의 비중은 앞으로 더 커질 것이고, 따라서 AWS 에서도 신경을 많이 쓰고 있을거라고 생각합니다. 그래서인지 문서가 친절하게 잘 적혀있습니다. 필요한 인프라들을 띄우며 MNIST 데이터셋을 XGBoost 모델로 학습하고, 배포하고, 추론하는데 까지 1시간이 채 안걸렸습니다. [Step 7.1: Validate a Model Deployed to Amazon SageMaker Hosting Services](https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-test-model-endpoint.html) 의 코드를 살짝 수정했습니다.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-07-21-pic1-mnist-xgboost-inference.png" alt="2019-07-21-pic1-mnist-xgboost-inference.png"/>
+  <img src="/images/2019-07-21-pic1-mnist-xgboost-inference.png" alt="2019-07-21-pic1-mnist-xgboost-inference.png"/>
 </p>
 
 ## ML inference 를 서비스로 만드려면?
@@ -17,7 +17,7 @@ ML 모델을 서비스로 배포하려면 어떻게 하는게 좋을지 궁금�
 [Step 9: Integrating Amazon SageMaker Endpoints into Internet-facing Applications](https://docs.aws.amazon.com/sagemaker/latest/dg/getting-started-client-app.html) 에서 AWS Lambda 를 쓰는 방법을 제안하고 있습니다. 앞에 HTTP endpoint 도 있으면 좋을 것 같습니다. 많이들 사용하는 Amazon API Gateway + AWS Lambda 조합이 생각납니다. 이를 구현하는 여러가지 방법이 가능한데, [chalice](https://github.com/aws/chalice) 프레임워크를 사용해봅니다. Flask 와 유사하게 어플리케이션 코드만 작성하면 chalice 가 필요한 aws 인프라를 구성해줍니다.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-07-21-pic2-api-gateway-lambda-sagemaker-endpoint.png" alt="2019-07-21-pic2-api-gateway-lambda-sagemaker-endpoint.png"/>
+  <img src="/images/2019-07-21-pic2-api-gateway-lambda-sagemaker-endpoint.png" alt="2019-07-21-pic2-api-gateway-lambda-sagemaker-endpoint.png"/>
 </p>
 
 ## chalice 로 API Gateway + Lambda + SageMaker Endpoint
@@ -104,7 +104,7 @@ Resources deployed:
 [Postman](https://www.getpostman.com/) 으로 테스트 해봅니다. [MNIST as .jpg](https://www.kaggle.com/scolianni/mnistasjpg) 에서 다운로드 받은 jpg 이미지 중 하나를 골라봅시다. multipart/form-data 에 `img` 를 key 로 지정하고, 이전 단계에서 확인한 Rest API URL 에 때려봅니다.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-07-21-pic3-result.png" alt="2019-07-21-pic3-result.png"/>
+  <img src="/images/2019-07-21-pic3-result.png" alt="2019-07-21-pic3-result.png"/>
 </p>
 
 추론된 label 값이 올바른 것을 확인할 수 있습니다.

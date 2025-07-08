@@ -11,9 +11,9 @@ tags:
 
 **누적 GA 방문수는 760 입니다.** GitHub Pages 만들때 사용한 [Kiko Now](https://aweekj.github.io/kiko-now/) 테마에서 GA 연동을 제공해줘서 트래킹 코드를 적는 것 만으로 연동할 수 있어 편했습니다. [Python 으로 지도 위에 정사각 격자를 그리려면?](https://chang12.github.io/python-map-grid/) 글의 지분이 매우 큽니다. 그 당시에 GA 숫자를 보면서 관심이 고파서 [페이스북 Python Korea 그룹에 글을 공유했었는데](https://www.facebook.com/groups/pythonkorea/permalink/2155761257840357/) 반응이 기대 이상이었습니다. 45분이나 공유해주셔서 신기했는데, 6분만 내역이 보이고 나머지 분들은 타임라인에 나만 보기(?) 설정으로 공유한 듯 합니다. 페이스북 타임라인을 개인 스크랩 용도로 사용하시는 분들이 꽤 있는 듯 해서 신기했습니다. 이때의 경험으로 "글을 쓰면 글의 주제에 부합하는 가장 큰 페이스북 그룹 딱 1개에 공유하자!" 라는 결심을 했는데, 이후 3개 글은 엣지가 아예 없는 듯 하여 (간단 지식, 문서 읽고 정리) 2번째 공유는 아직입니다.
 
-![2019-04-27-ga-visits.jpg](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-04-27-ga-visits.jpg)
+![2019-04-27-ga-visits.jpg](/images/2019-04-27-ga-visits.jpg)
 
-![2019-04-27-share-python-korea-facebook-group.jpg](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-04-27-share-python-korea-facebook-group.jpg)
+![2019-04-27-share-python-korea-facebook-group.jpg](/images/2019-04-27-share-python-korea-facebook-group.jpg)
 
 **글 쓰는 습관은 학습 의욕을 높여줍니다.** 예전에는 읽고 이해가 안되는 부분이 있을 때 그냥 넘길 때가 많았습니다. 블로그를 만들고 글또 활동하며 글을 적다보니 더 많은 글을 채워 넣고 싶은 욕망이 피어오르고, 읽고 이해가 안됬을 때 마저 이해해서 글로 적을 생각으로 인내심을 가지고 더 들여다보게 되었습니다. "언젠가 공부해보자" 하고 쌓아놨던 묵은 주제들도, 글을 더 적기 위해 더 빨리 시간을 할애하기 시작했습니다. gRPC, Kubernetes (EKS), Airflow, Fargate 의 주제들도 얼른 정리해서 블로그에 적고 싶습니다.
 
@@ -21,6 +21,6 @@ tags:
 
 **이렇듯 힘든 글쓰기에, 글또 모임은 큰 도움이 됩니다.** 각종 분야의 다양한 모임원들이 꾸준히 글을 올리는 모습은 자극이 되고 (또한 다른 분야의 글을 읽다보면 재밌음), 내가 글을 쓰고 공유하면 이를 읽어줄 최소한의 독자층이 있다는 사실은 자칫 쓸쓸해질 수 있는 마음에 힘이 됩니다. 과거를 회상하다보니 다른 분들의 글에도 더 많은 피드백을 줬어야 했는데 하는 반성의 마음이 드는데... 아무튼 글또 모임은 큰 도움이 됩니다.
 
-![2019-04-27-geultto-slack-reaction.jpg](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-04-27-geultto-slack-reaction.jpg)
+![2019-04-27-geultto-slack-reaction.jpg](/images/2019-04-27-geultto-slack-reaction.jpg)
 
 **결론 : 개발 블로그 글쓰기는 유익하고, 글또 모임은 이에 도움이 됩니다.**
