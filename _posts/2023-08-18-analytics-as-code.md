@@ -80,7 +80,7 @@ metrics store 덕분에, metric 들이 yaml file 로 관리되고 있어서, 간
 - 이를 통해 metric 들을 parent/child 관계의 tree 자료구조로 만들고,
 - 이를 적절한 도구로 (e.g. [markmap](https://markmap.js.org/)) render 하여 hierarchy 를 그렸다.
 
-![2023-06-13-metric-hierarchy.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2023-06-13-metric-hierarchy.png)
+![2023-06-13-metric-hierarchy.png](/images/2023-06-13-metric-hierarchy.png)
 
 # dashboard-as-code
 

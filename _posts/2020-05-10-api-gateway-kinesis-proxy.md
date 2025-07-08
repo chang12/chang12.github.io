@@ -194,7 +194,7 @@ aws apigateway put-method-response \
 
 정리해보면 `/` resource 가 요청을 처리해서 응답을 내려주는 건 아래 diagram 처럼 됩니다.
 
-![2020-05-10-api-gateway-diagram.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2020-05-10-api-gateway-diagram.png)
+![2020-05-10-api-gateway-diagram.png](/images/2020-05-10-api-gateway-diagram.png)
 
 ## Deploy
 

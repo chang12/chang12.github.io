@@ -35,7 +35,7 @@ Cloud Composer 클러스터(?) 를 **Environment** 라고 부릅니다. [Compose
 
 생성 후 Running 상태로 전이할 때 까지 ~ 15분 정도 걸립니다.
 
-![images/2019-09-08-pic1-environment.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-09-08-pic1-environment.png)
+![images/2019-09-08-pic1-environment.png](/images/2019-09-08-pic1-environment.png)
 
 - `Airflow webserver` : 웹인데 다양한 기능들이 있습니다.
 - `Logs` : Stackdriver Logging 로 넘어갑니다.
@@ -86,7 +86,7 @@ with models.DAG('<dag_id>',
 
 ## DAG 업로드
 
-![images/2019-09-08-pic1-environment.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-09-08-pic1-environment.png)
+![images/2019-09-08-pic1-environment.png](/images/2019-09-08-pic1-environment.png)
 
 DAGs folder 를 클릭하면, Environment 생성할 때 자동으로 생성된 Bucket 경로의 Cloud Storage Console 로 이동합니다. [Quickstart](https://cloud.google.com/composer/docs/quickstart#uploading_the_dag_to) 문서를 참고해서 위에서 작성한 DAG .py 파일을 업로드 합니다. 업로드 후 1-2분 안에 반영되어 Airflow webserver 에서 확인할 수 있습니다.
 
@@ -94,7 +94,7 @@ DAGs folder 를 클릭하면, Environment 생성할 때 자동으로 생성된 B
 
 수 시간이 지난 뒤, Airflow webserver 의 Browse 탭의 Task Instances 메뉴로 접속하면, Task 선언때 적은대로 1시간 마다 주기적으로 작업이 실행되는 것을 확인할 수 있습니다.
 
-![images/2019-09-08-pic2-task-instances.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-09-08-pic2-task-instances.png)
+![images/2019-09-08-pic2-task-instances.png](/images/2019-09-08-pic2-task-instances.png)
 
 ## 레퍼런스
 

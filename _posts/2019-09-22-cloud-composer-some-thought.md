@@ -134,7 +134,7 @@ def task_fail_slack_alert(context):
 
 실제 Slack channel 에 전송되는 메시지는 아래 이미지처럼 생겼습니다.
 
-![2019-09-22-pic1-slack-alert.png](https://raw.githubusercontent.com/chang12/chang12.github.io/master/images/2019-09-22-pic1-slack-alert.png)
+![2019-09-22-pic1-slack-alert.png](/images/2019-09-22-pic1-slack-alert.png)
 
 ## 레퍼런스
 
