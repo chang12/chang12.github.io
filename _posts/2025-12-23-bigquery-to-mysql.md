@@ -50,6 +50,9 @@ def sink():
     Model.objects.bulk_create(batch, ignore_conflicts=True)
     print(f"Batch {batch_num}: {len(batch)} records")
 
+# jobs.getQueryResults 에서 pagination 을 지원한다.
+# pageToken, maxResults 를 parameter 로 받는다.
+# https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults
 for row in query_job.result():
     batch.append(Model(**row))
     if len(batch) >= BATCH_SIZE:
