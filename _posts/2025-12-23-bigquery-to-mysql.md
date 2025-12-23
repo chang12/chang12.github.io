@@ -10,7 +10,7 @@ assign 된 epic 에서 진행 하려는 실험의 target users 를 구성하는 
 1. 같은 목적의 이전 실험에 assign 되지 않았거나 or `control` 에 assign 되었음.  
 2. 같은 목적의 이전 실험 기간 동안 어떤 screen 을 view 한 적 없음.
 
-1번은 과거에도 요구된 바 있는 condition 이었는데, 이전 실험을 계속 RUNNING 으로 둔채로, 새로운 실험을 덧붙이는 식으로 구현 했었다.
+1번은 과거에도 요구된 바 있다. 이전 실험을 계속 RUNNING 으로 둔채로, 새로운 실험을 덧붙이는 식으로 구현 했었다.
 
 ```python
 # 이전 실험을 assign 하고,
