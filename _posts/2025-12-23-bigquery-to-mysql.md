@@ -23,7 +23,7 @@ property2 = get_property('실험2', context={property1, ...})
 
 # 구현
 
-그래서 bigquery 에서 해당 조건을 집계하여 -> mysql db 로 sync 하고, 그걸 사용하는 걸로 결정했다. 이전 실험은 종료하고, 그래서 `이전 실험 기간` 을 명확히 하고, bigquery -> mysql db 로 한번 sync 하고, 그걸 사용하는.
+그래서 bigquery 에서 해당 조건을 집계하여, mysql db 로 sync 하고, 그걸 사용하는 걸로 결정했다. 이전 실험은 종료하고, 그래서 `이전 실험 기간` 을 명확히 하고, bigquery 에서 query 한 result 를 mysql db 로 한번 sync 하고, 그걸 사용하는.
 
 새로운 실험을 구현하려는 application 은 django 기반이었기에, 아래와 같은 script 를 작성했다.
 
