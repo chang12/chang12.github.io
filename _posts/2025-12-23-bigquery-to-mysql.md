@@ -46,6 +46,7 @@ batch = []
 batch_num = 0
 
 def sink():
+    global batch_num
     batch_num += 1
     
     # 여러 record 를 한번의 insert 로 처리한다.
