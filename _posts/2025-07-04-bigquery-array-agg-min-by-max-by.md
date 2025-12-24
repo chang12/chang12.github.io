@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "bigquery 에서 최초 or 마지막 값을 취하는 sql 패턴에 관하여 (row_number, array_agg, min/max_by, column pruning)"
+title: "bigquery 에서 최초 or 마지막 값을 취하는 sql 패턴"
 tags: []
 ---
 
