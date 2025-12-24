@@ -77,3 +77,11 @@ print(f"Done! Total {batch_num} batches.")
 ```
 
 우려되는 부분들이 있는 rough 한 script 이나, 당장에 필요한 작업을 마치는 데는 문제가 없었다.
+
+# 생각
+
+mysql table 에 primary key (혹은 unique key) 가 있음을 가정했다. 이 글에서 다룬 작업이, 크게 봤을 때 feature store 에 해당하는 얘기라 생각 하는데, 그 쪽에서 그렇게 어색한 가정은 아닐 것이다. entity 개념이 명확하고, entity 에 대한 feature 를 얘기하는 것이니, entity 의 id 가 있을 것이고, 그게 pk 가 될 것이다.
+
+지금 구현에서는 bigquery 에서 record 가 delete 되어도, 그게 mysql 에 반영되지 못하고 계속 남아있게 된다. bigquery 내에서 직전 result 와 이번 result 의 diff 를 따져서 added/updated/deleted 로 분류하여 처리해야 할 것이다.
+
+한번의 실행이 여러 batch 를 처리 하는데, 중간에 어떠한 이유로 실패 하고 재개 했을 때, 이미 처리한 batch 는 넘어가고 / 남은 batch 들만 처리하면 좋을 것이다.
