@@ -47,7 +47,13 @@ batch_num = 0
 
 def sink():
     batch_num += 1
+    
+    # 여러 record 를 한번의 insert 로 처리한다.
+    # insert into ... values ... 에 여러 tuple 을 적는 것.
+    # 
+    # ignore_conflicts=True 이므로, duplicate-key error 등이 발생해도, 무시한다.
     Model.objects.bulk_create(batch, ignore_conflicts=True)
+    
     print(f"Batch {batch_num}: {len(batch)} records")
 
 # jobs.getQueryResults 에서 pagination 을 지원한다.
