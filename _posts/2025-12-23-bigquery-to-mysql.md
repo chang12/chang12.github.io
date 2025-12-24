@@ -19,7 +19,7 @@ property2 = get_property('실험2', context={property1, ...})
 
 그런데 2번은 마땅한 방법이 없었다.
 
-# 구현
+## 구현
 
 그래서 bigquery 에서 해당 조건을 집계하여, mysql db 로 sync 하고, 그걸 사용하는 걸로 결정했다. 이전 실험은 종료하고, 그래서 `이전 실험 기간` 을 명확히 하고, bigquery 에서 query 한 result 를 mysql db 로 한번 sync 하고, 그걸 사용하는.
 
@@ -76,7 +76,7 @@ print(f"Done! Total {batch_num} batches.")
 
 우려되는 부분들이 있는 rough 한 script 이나, 당장에 필요한 작업을 마치는 데는 문제가 없었다.
 
-# 생각
+## 생각
 
 mysql table 에 primary key (혹은 unique key) 가 있음을 가정했다. 이 글에서 다룬 작업이, 크게 봤을 때 feature store 에 해당하는 얘기라 생각 하는데, 그 쪽에서 그렇게 어색한 가정은 아닐 것이다. entity 개념이 명확하고, entity 에 대한 feature 를 얘기하는 것이니, entity 의 id 가 있을 것이고, 그게 pk 가 될 것이다.
 
