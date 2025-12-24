@@ -53,6 +53,10 @@ def sink():
 # jobs.getQueryResults 에서 pagination 을 지원한다.
 # pageToken, maxResults 를 parameter 로 받는다.
 # https://docs.cloud.google.com/bigquery/docs/reference/rest/v2/jobs/getQueryResults
+# 
+# .result() 는 RowIterator 를 return 하는데,
+# 개가 내부적으로 그 jobs.getQueryResults 를 써서 pagination 해준다.
+# 그러니 query result 가 크더라도, memory 에는 page 만큼만 올라간다.  
 for row in query_job.result():
     batch.append(Model(**row))
     if len(batch) >= BATCH_SIZE:
