@@ -4,8 +4,6 @@ title: "bigquery -> mysql"
 tags: []
 ---
 
-# 배경
-
 assign 된 epic 에서 진행 하려는 실험의 target users 를 구성하는 condition 들이, 보통의 실험들 보다 조금 까다로웠다.
 1. 같은 목적의 이전 실험에 assign 되지 않았거나 or `control` 에 assign 되었음.  
 2. 같은 목적의 이전 실험 기간 동안 어떤 screen 을 view 한 적 없음.
