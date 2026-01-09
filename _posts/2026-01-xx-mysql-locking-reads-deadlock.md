@@ -1,0 +1,15 @@
+---
+layout: post
+title: "mysql locking reads, deadlock, 중복 방지"
+tags: []
+---
+
+mysql 8.0 은 [locking reads](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-reads.html) 를 지원한다. locking reads 때 어떤 lock 을 사용하는 지는, [isolation level 에 따라 달라진다.](https://dev.mysql.com/doc/refman/8.0/en/innodb-transaction-isolation-levels.html)
+
+repeatable read 이고 & unique key 를 사용하지 않는 경우, gap locks or next-key locks 을 사용한다.
+
+> For other search conditions, InnoDB locks the index range scanned, **`using gap locks or next-key locks`** to block insertions by other sessions into the gaps covered by the range.
+
+read committed 일때는 record lock 만 사용한다.
+
+> For locking reads (SELECT with FOR UPDATE or FOR SHARE), UPDATE statements, and DELETE statements, InnoDB **`locks only index records, not the gaps before them,`** and thus permits the free insertion of new records next to locked records.
