@@ -34,4 +34,39 @@ repeatable read 이고 & `unique index with a unique search condition` 이 아�
 
 > When deadlock detection is enabled (the default), InnoDB automatically detects transaction deadlocks and rolls back a transaction or transactions to break the deadlock. InnoDB tries to pick **`small transactions to roll back`**, where the size of a transaction is determined by the number of rows inserted, updated, or deleted.
 
+local 에서 간단히 test 해서 재현 해볼 수 있다.
 
+```bash
+docker run --name mysql-deadlock-test \
+  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+  -e MYSQL_DATABASE=testdb \
+  -p 3306:3306 \
+  -d mysql:8.0
+```
+
+```bash
+docker exec -it mysql-deadlock-test mysql testdb
+```
+
+```sql
+create table t (id int primary key);
+insert into t values (10), (20), (30);
+```
+
+terminal 2개를 열고 각각 접속해서, 
+
+```bash
+docker exec -it mysql-deadlock-test mysql testdb
+```
+
+아래 순서로 실행한다.
+
+| 1                                           | 2                                                                                        |
+|---------------------------------------------|------------------------------------------------------------------------------------------|
+| `begin;`                                    |                                                                                          |
+| `select * from t where id = 25 for update;` |                                                                                          |
+|                                             | `begin;`                                                                                 |
+|                                             | `select * from t where id = 25 for update;`                                              |
+| `insert into t values (25);`                |                                                                                          |
+| (멈춰 있음)                                     | `insert into t values (25);`                                                             |
+| `Query OK, 1 row affected (3.85 sec)`       | `ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction` |
