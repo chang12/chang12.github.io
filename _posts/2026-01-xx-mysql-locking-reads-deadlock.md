@@ -29,3 +29,9 @@ repeatable read 이고 & `unique index with a unique search condition` 이 아�
 하지만 각 transaction 내에서 이어서 같은 range 에 insert 하려는 경우, 얘기가 달라진다. insert 하기 위해 gap 에 대한 [insert intention lock](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html#innodb-insert-intention-locks) 을 획득 하려고 하나, 다른 transaction 이 같은 gap 에 대해 이미 gap lock 을 가지고 있으므로, deadlock 에 빠지게 된다.
 
 [InnoDB Data Locking - Part 2 "Locks"](https://dev.mysql.com/blog-archive/innodb-data-locking-part-2-locks/) 에서 이러한 gap lock 과 insert intention lock 간의 priority 에 대해 더 자세하게 다루는 것 같다. 제대로 읽어보진 못했다.
+
+이러한 deadlock 이 발생했을 때, 무한히 교착 상태에 빠지는 것은 아니고, [innodb 에서 적절히 일부 transaction 들을 rollback 시킨다.](https://dev.mysql.com/doc/refman/8.0/en/innodb-deadlock-detection.html)
+
+> When deadlock detection is enabled (the default), InnoDB automatically detects transaction deadlocks and rolls back a transaction or transactions to break the deadlock. InnoDB tries to pick **`small transactions to roll back`**, where the size of a transaction is determined by the number of rows inserted, updated, or deleted.
+
+
