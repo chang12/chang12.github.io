@@ -16,7 +16,7 @@ repeatable read 이고 & `unique index with a unique search condition` 이 아�
 
 > For other search conditions, InnoDB locks the index range scanned, **`using gap locks or next-key locks`** to block insertions by other sessions into the gaps covered by the range.
 
-[next-key lock = record lock + gap lock](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html#innodb-next-key-locks) 이다.
+[next-key lock = record lock + (record 앞) gap lock](https://dev.mysql.com/doc/refman/8.0/en/innodb-locking.html#innodb-next-key-locks) 이다.
 
 > A next-key lock is a combination of a record lock on the index record and a gap lock on the gap before the index record.
 
