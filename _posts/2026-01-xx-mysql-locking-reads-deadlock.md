@@ -49,8 +49,11 @@ docker exec -it mysql-deadlock-test mysql testdb
 ```
 
 ```sql
-create table t (id int primary key);
-insert into t values (10), (20), (30);
+create table membership (
+  user_id int,
+  data varchar(100),
+  index ix_userid (user_id)
+);
 ```
 
 terminal 2개를 열고 각각 접속해서, 
@@ -61,12 +64,28 @@ docker exec -it mysql-deadlock-test mysql testdb
 
 아래 순서로 실행한다.
 
-| 1                                           | 2                                                                                        |
-|---------------------------------------------|------------------------------------------------------------------------------------------|
-| `begin;`                                    |                                                                                          |
-| `select * from t where id = 25 for update;` |                                                                                          |
-|                                             | `begin;`                                                                                 |
-|                                             | `select * from t where id = 25 for update;`                                              |
-| `insert into t values (25);`                |                                                                                          |
-| (멈춰 있음)                                     | `insert into t values (25);`                                                             |
-| `Query OK, 1 row affected (3.85 sec)`       | `ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction` |
+| seq | tx1                                                                     | tx2                                                                                      |
+|-----|-------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| 1   | `begin;`                                                                |                                                                                          |
+| 2   | `select * from membership where user_id = 100 for update;`              |                                                                                          |
+| 3   |                                                                         | `begin;`                                                                                 |
+| 4   |                                                                         | `select * from membership where user_id = 100 for update;`                               |
+| 5   | `insert into membership (user_id, data) values (100, 'a'), (100, 'b');` |                                                                                          |
+| 6   | (멈춰 있음)                                                                 | `insert into membership (user_id, data) values (100, 'a'), (100, 'b');`                  |
+| 7   | `Query OK, 2 rows affected`                                             | `ERROR 1213 (40001): Deadlock found when trying to get lock; try restarting transaction` |
+
+seq = 6 에서 query 해보면, tx1 이 `X,INSERT_INTENTION` lock 을 획득 하려고 `WAITING` 중인 걸 볼 수 있다.
+
+```
+mysql> select engine_transaction_id, object_name, index_name, object_instance_begin, lock_type, lock_mode, lock_status, lock_data from performance_schema.data_locks where lock_type != 'TABLE';
++-----------------------+-------------+------------+-----------------------+-----------+--------------------+-------------+------------------------+
+| engine_transaction_id | object_name | index_name | object_instance_begin | lock_type | lock_mode          | lock_status | lock_data              |
++-----------------------+-------------+------------+-----------------------+-----------+--------------------+-------------+------------------------+
+|                  1955 | membership  | ix_userid  |       281472963502320 | RECORD    | X                  | GRANTED     | supremum pseudo-record |
+|                  1954 | membership  | ix_userid  |       281472963496112 | RECORD    | X                  | GRANTED     | supremum pseudo-record |
+|                  1954 | membership  | ix_userid  |       281472963496456 | RECORD    | X,INSERT_INTENTION | WAITING     | supremum pseudo-record |
++-----------------------+-------------+------------+-----------------------+-----------+--------------------+-------------+------------------------+
+3 rows in set (0.00 sec)
+```
+
+table 에 아무런 record 도 없는 상황이라, lock_data = `supremum pseudo-record` 이다.
